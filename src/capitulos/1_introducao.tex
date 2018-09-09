@@ -4,30 +4,35 @@
 \chapter[Introdução]{Introdução}
 %\addcontentsline{toc}{chapter}{Introdução}
 % ----------------------------------------------------------
-\par Este capítulo apresenta a motivação deste trabalho, os objetivos definidos, assim como sua metodologia.
+\par Este capítulo apresenta a motivação deste trabalho, os objetivos definidos, e a metodologia adotada.
 
 \section{Motivação}
 
 \par Devido ao crescimento do termo gamification nos últimos anos, \cite{groh2012gamification} aplicações com contextos não relacionados a jogos, vem adotando esta metodologia para estimular usuários a realizarem determinados processos. Alguns exemplos de aplicações que utilizam gamification são Duolingo \cite{melo2016eficiencia} e foursquare \cite{huotari2012defining}.
 
-\par Adicionar funcionalidades de gamification à aplicações, aumenta a complexidade do projeto para o desenvolvedor, pois será necessário desenvolver a aplicação em si e os processos que desencadeiam a lógica de gamification baseando-se no fluxo desta aplicação, isto também pode dificultar uma manutenção futura.
+\par Adicionar funcionalidades de gamification à aplicações, aumenta a complexidade do projeto para o desenvolvedor, pois será necessário desenvolver o produto em si, e os processos que desencadeiam a lógica de gamification baseando-se no fluxo desta aplicação. Isto também pode dificultar a manutenção futura devido a complexidade adicional \cite{guerra2017approach}.
 
-\par O trabalho é motivado pela oportunidade de automatização no processo de desenvolvimento de módulos e componentes que aplicam lógicas de gamificação, como troféus, recompensas, pontos ou rankings para determinado usuário definido.
-\par Aplicações em diferentes contextos não relacionados a jogos que optem implementar gamificação para cativar ou seus usuários. (complementar)
-\par Recomendável a utilização de figuras e/ou tabelas.
+\par Este trabalho é motivado pela oportunidade de automatização no processo de desenvolvimento de módulos e componentes que aplicam lógicas de gamificação, como troféus, recompensas, pontos ou rankings para determinado usuário, e dar continuidade no trabalho iniciado por Dr. Eduardo Guerra em conjunto com outros colaboradores do INPE e da UNIFESP.
 
 \section{Problema}
-\par Apresente claramente o seu problema.
+
+\par O problema identificado foi a complexidade adicional para desenvolvimento e manutenção de aplicações que utilizam lógicas de gamification. Uma oportunidade de melhoria foi o desenvolvimento de um framework de gamification, o esfinge gamification \cite{guerra2017approach}.
 
 % Section Objetivo Geral!
 \section{Objetivo Geral}
-\par Implementação de novos recursos no framework de gamification dando continuidade no trabalho desenvolvido por Dr. Eduardo Guerra, em conjunto com outros colaboradores do INPE e da UNIFESP. 
+
+\par Implementação de novos recursos no framework, esfinge gamification, dando continuidade no trabalho desenvolvido por Dr. Eduardo Guerra, em conjunto com outros colaboradores do INPE e da UNIFESP. 
 
 % Section Objetivo Especifico!
 \section{Objetivo Espec\'ifico}
+
 \par Para a consecução deste objetivo foram estabelecidos os objetivos específicos:
 \begin{itemize}
     \item Anotações para persistência dos dados de gamificação;
     \item Anotações para interceptação e captura de eventos relevantes a pontuação;
     \item Controle de acesso baseado em conquistas.
 \end{itemize}
+
+\section{Metodologia}
+
+\par O desenvolvimento dos componentes adicionais para o framework tem como etapa inicial a criação de anotações para aumentar a abstração das funcionalidades oferecidas pela solução, realizando assim uma interface amigável, e permitindo ao desenvolvedor recuperar dados de conquistas de uma maneira simples e eficaz. Para realizar estes objetivos técnicas de reflexão e anotação em java foram utilizadas.
