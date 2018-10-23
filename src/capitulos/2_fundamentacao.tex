@@ -6,12 +6,17 @@
 \section{Java}
 
 \par Java é uma linguagem de programação multiplataforma, concorrente (executa mais de uma tarefa em paralelo), baseada em classes e orientada a objetos \cite{joy2000java}.
-\par A linguagem Java é compilada e interpretada. Após escrever um programa em Java, estes são salvos como código fonte com extensão ".java". Quando estes códigos fontes são compilados, um arquivo binário chamado de arquivo de classe com extensão ".class" é gerado. Esses arquivos não são executados diretamente pelos processadores, nem pelos sistemas operacionais, pois eles não contêm instruções para os mesmos. Os programas Java são compilados em um formato chamado bytecode. Desta forma, esses programas podem ser executados em qualquer sistema operacional que possua um interpretador JRE (Java Runtime Environment). Assim, o código precisa ser compilado apenas uma vez em cada sistema para funcionar, pois os bytecodes serão executados da mesma forma em qualquer plataforma\cite{indrusiak1996linguagem}.
+\par A linguagem Java é compilada e interpretada. Após escrever um programa em Java, estes são salvos como código fonte com extensão ".java". Quando estes códigos fontes são compilados, um arquivo binário chamado de arquivo de classe com extensão ".class" é gerado. Esses arquivos não são executados diretamente pelos processadores, nem pelos sistemas operacionais, pois eles não contêm instruções para os mesmos. Os programas Java são compilados em um formato de arquivo chamado bytecode. Desta forma, esses programas podem ser executados em qualquer sistema operacional que possua um interpretador JRE (Java Runtime Environment). Assim, o código precisa ser compilado apenas uma vez em cada sistema para funcionar, pois os bytecodes serão executados da mesma forma em qualquer plataforma\cite{indrusiak1996linguagem}.
 \par É uma linguagem fortemente tipada, isto é, as características das variáveis tem que ser definidas em tempo de compilação. Ela possui um coletor de lixo (garbage collector) para evitar problemas de segurança como deadlock. \cite{joy2000java}
 
-\subsection{Reflection}
+\subsection{Reflexão}
 
-\subsection{Annotation}
+\par De acordo com o livro "Componentes Reutilizáveis em Java com Reflexão e Anotações", o conceito de reflexão pode ser definido como um processo em que um programa pode visualizar e alterar sua própria estrutura assim como seu comportamento \cite{guerra2014componentes}.
+\par As classes de reflexão disponíveis na linguagem de programação Java, se localizam no pacote java.lang.reflect. Existem classes localizadas neste pacote que não aplicam o conceito de reflexão, mas sim o de introspecção, que é a obtenção de informações sobre classes, sem a modificação da estrutura das mesmas \cite{guerra2014componentes}.
+
+\subsection{Anotação}
+
+\par Anotações são informações que podem ser inseridas nos códigos java.
 
 \section{Framework}
 
@@ -24,15 +29,14 @@ Baseado nisso frameworks permitem que aplicações com estruturas semelhantes se
 \section{Esfinge Project}
 
 \par Esfinge Project é um projeto open-source iniciado em 2011 por Dr. Eduardo Guerra junto a GSW, que tem como objetivo a criação de soluções reutilizáveis para um desenvolvimento ágil, um produto final flexível e de fácil manutenção.
-\par O projeto disponibiliza 9 frameworks para a linguagem de programação Java até o momento, estes são: QueryBuilder, Comparison,
-Guardian, AOM Role Mapper, SystemGlue, Gamification, Metadata, Classmock, ReTest.
-\par Todos os frameworks citados acima seguem uma filosofia que consiste em: Configuração de metadados para que o comportamento desejado ocorra; Componentes que podem ser integrados a aplicações de forma simples; Pontos de extensão para criação de novas funcionalidades; Remover a preocupação com a solução que o framework disponibiliza, permitindo que o desenvolvedor foque apenas em sua aplicação específica.
-\par O projeto está disponível no endereço: http://esfinge.sf.net \cite{esfinge2011}.
+\par O projeto disponibiliza 9 frameworks até o momento, estes são: QueryBuilder, Comparison, Guardian, AOM Role Mapper, SystemGlue, Gamification, Metadata, Classmock, ReTest.
+\par Todos os frameworks citados acima seguem uma filosofia que consiste em: Configuração de metadados para que o comportamento desejado ocorra; Componentes que podem ser integrados a aplicações de forma simples; Pontos de extensão para criação de novas funcionalidades; Remover a preocupação com a solução que o framework disponibiliza, permitindo que o desenvolvedor foque apenas em sua aplicação específica \cite{esfinge2011}.
+\par O projeto está disponível no endereço: http://esfinge.sf.net.
 
 \subsection{Esfinge Gamification}
 
-\par O Esfinge Gamification é um framework que aplica lógica gamification, para softwares que necessitam destes processos, independente do domínio do software é possível utilizar o framework, pois este é desacoplado das lógicas da aplicação e é responsável pela tratativa dos dados de gamification, portanto, pode ser integrado a qualquer programa Java, permitindo que o desenvolvedor foque na solução que está trabalhando, e deixe as responsabilidades de gamification para o framework.
-\par O comportamento do framework é especificado via metadados, estes são anotações que podem ser inseridas nos métodos do software. Existem quatro tipos de processos implementados pelo framework: Ponto, Ranking, Reward, Troféu. Também é possível aplicar outras lógicas gamification, estendendo a inteface Achievement.
+\par O Esfinge Gamification é um framework que aplica lógica gamification, para softwares que necessitam destes processos, independente do domínio do software é possível utilizar o framework, pois este é desacoplado das lógicas da aplicação e é responsável pela tratativa dos dados de gamification, portanto, pode ser integrado a qualquer programa Java, permitindo que o desenvolvedor foque na solução que está trabalhando, e deixe as responsabilidades de gamification para o framework  \cite{esfinge2011}.
+\par O comportamento do framework é especificado via metadados, estes são anotações que podem ser inseridas nos métodos do software. Existem quatro tipos de processos implementados pelo framework: Ponto, Ranking, Reward, Troféu. Também é possível aplicar outras lógicas gamification, estendendo a inteface Achievement  \cite{esfinge2011}.
 
 \subsubsection{Conquistas}
 
