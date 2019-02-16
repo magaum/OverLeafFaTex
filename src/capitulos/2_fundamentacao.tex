@@ -2,21 +2,19 @@
 \label{ch:fundamentacao}
 \par Neste capítulo ser\~ao fundamentados os conhecimentos b\'asicos para o entendimento do trabalho.
 
-
 \section{Java}
 
 \par Java é uma linguagem de programação multiplataforma, concorrente (executa mais de uma tarefa em paralelo), baseada em classes e orientada a objetos \cite{joy2000java}.
-\par A linguagem Java é compilada e interpretada. Após escrever um programa em Java, estes são salvos como código fonte com extensão ".java". Quando estes códigos fontes são compilados, um arquivo binário chamado de arquivo de classe com extensão ".class" é gerado. Esses arquivos não são executados diretamente pelos processadores, nem pelos sistemas operacionais, pois eles não contêm instruções para os mesmos. Os programas Java são compilados em um formato de arquivo chamado bytecode. Desta forma, esses programas podem ser executados em qualquer sistema operacional que possua um interpretador JRE (Java Runtime Environment). Assim, o código precisa ser compilado apenas uma vez em cada sistema para funcionar, pois os bytecodes serão executados da mesma forma em qualquer plataforma\cite{indrusiak1996linguagem}.
-\par É uma linguagem fortemente tipada, isto é, as características das variáveis tem que ser definidas em tempo de compilação. Ela possui um coletor de lixo (garbage collector) para evitar problemas de segurança como deadlock. \cite{joy2000java}
+\par A linguagem Java é compilada e interpretada. Após escrever um programa em Java, estes são salvos como código fonte com extensão ".java". Quando estes códigos fontes são compilados, um arquivo binário chamado de arquivo de classe com extensão ".class" é gerado. Esses arquivos não são executados diretamente pelos processadores, nem pelos sistemas operacionais, pois eles não contêm instruções para os mesmos. Os programas Java são compilados em um formato de arquivo chamado \textit{bytecode}. Desta forma, esses programas podem ser executados em qualquer sistema operacional que possua um interpretador JRE (Java \textit{Runtime} \textit{Environment}). Assim, o código precisa ser compilado apenas uma vez em cada sistema para funcionar, pois os \textit{bytecodes} serão executados da mesma forma em qualquer plataforma\cite{indrusiak1996linguagem}.
+\par É uma linguagem fortemente tipada, isto é, as características das variáveis tem que ser definidas em tempo de compilação. Ela possui um coletor de lixo (\textit{garbage collector}) para evitar problemas de segurança como \textit{deadlock}. \cite{joy2000java}
 
 \subsection{Reflexão}
 
-\par De acordo com o livro "Componentes Reutilizáveis em Java com Reflexão e Anotações", o conceito de reflexão pode ser definido como um processo em que um programa pode visualizar e alterar sua própria estrutura assim como seu comportamento \cite{guerra2014componentes}.
-\par As classes de reflexão disponíveis na linguagem de programação Java, se localizam no pacote java.lang.reflect. Existem classes localizadas neste pacote que não aplicam o conceito de reflexão, mas sim o de introspecção, que é a obtenção de informações sobre classes, sem a modificação da estrutura das mesmas \cite{guerra2014componentes}.
+\par De acordo com Eduardo Guerra \citeyear{guerra2014componentes} o conceito de reflexão pode ser definido como um processo em que um programa pode visualizar e alterar sua própria estrutura assim como seu comportamento. As classes de reflexão disponíveis na linguagem de programação Java, se localizam no pacote \textit{java.lang.reflect}. Existem classes localizadas neste pacote que não aplicam o conceito de reflexão, mas sim o de introspecção, que é a obtenção de informações sobre classes, sem a modificação da estrutura das mesmas.
 
 \subsection{Anotação}
 
-\par Anotações são informações que podem ser inseridas nos códigos java.
+\par Anotações em Java, são utilizadas para definição de metadados, isto é, informações sobre algo, e podem ser inseridas em: Pacotes, classes, interfaces, métodos, declaração de variáveis, construtores e em anotações. Por padrão, nenhum comportamento é alterado com a adição de uma anotação, isto é feito a partir de métodos que verificam a existência das mesmas \cite{bloch2004jsr}.
 
 \section{Framework}
 
@@ -25,24 +23,31 @@ Baseado nisso frameworks permitem que aplicações com estruturas semelhantes se
 
 \section{Gamification}
 
+\par Gamification é a utilização de conceitos de jogos, sendo eles: Ganho de pontos, \textit{ranking}, troféus, \textit{rewards}, em aplicações com outros contextos. \textit{Softwares} de e-commerce, sites de e-learning, são alguns exemplos de contextos onde o gamification pode ser aplicado, o propósito do gamification é fazer com que a utilização das aplicações não diminua com o tempo, proporcionando melhor experiência ao usuário, pois as conquistas adquiridas durante a utilização contribuem nesta tarefa. Um exemplo de aplicação que utiliza gamification é a foldit \cite{burke2012behind}, que utiliza conceitos de pontos e troféus em um jogo de quebra cabeça, para na verdade, prever a estrutura da proteína humana \cite{deterding2011gamification}.
 
 \section{Esfinge Project}
 
-\par Esfinge Project é um projeto open-source iniciado em 2011 por Dr. Eduardo Guerra junto a GSW, que tem como objetivo a criação de soluções reutilizáveis para um desenvolvimento ágil, um produto final flexível e de fácil manutenção.
+\par Esfinge Project\footnote{O projeto está disponível no endereço: http://esfinge.sf.net} é um projeto \textit{open-source} iniciado em 2011 por Dr. Eduardo Guerra junto a GSW, que tem como objetivo a criação de soluções reutilizáveis para um desenvolvimento ágil, um produto final flexível e de fácil manutenção.
 \par O projeto disponibiliza 9 frameworks até o momento, estes são: QueryBuilder, Comparison, Guardian, AOM Role Mapper, SystemGlue, Gamification, Metadata, Classmock, ReTest.
 \par Todos os frameworks citados acima seguem uma filosofia que consiste em: Configuração de metadados para que o comportamento desejado ocorra; Componentes que podem ser integrados a aplicações de forma simples; Pontos de extensão para criação de novas funcionalidades; Remover a preocupação com a solução que o framework disponibiliza, permitindo que o desenvolvedor foque apenas em sua aplicação específica \cite{esfinge2011}.
-\par O projeto está disponível no endereço: http://esfinge.sf.net.
 
 \subsection{Esfinge Gamification}
 
 \par O Esfinge Gamification é um framework que aplica lógica gamification, para softwares que necessitam destes processos, independente do domínio do software é possível utilizar o framework, pois este é desacoplado das lógicas da aplicação e é responsável pela tratativa dos dados de gamification, portanto, pode ser integrado a qualquer programa Java, permitindo que o desenvolvedor foque na solução que está trabalhando, e deixe as responsabilidades de gamification para o framework  \cite{esfinge2011}.
-\par O comportamento do framework é especificado via metadados, estes são anotações que podem ser inseridas nos métodos do software. Existem quatro tipos de processos implementados pelo framework: Ponto, Ranking, Reward, Troféu. Também é possível aplicar outras lógicas gamification, estendendo a inteface Achievement  \cite{esfinge2011}.
+\par O comportamento do framework é especificado via metadados, estes são anotações que podem ser inseridas nos métodos do software. Existem quatro tipos de processos implementados pelo framework: Ponto, Ranking, \textit{Reward}, Troféu. Também é possível aplicar outras lógicas gamification, estendendo a interface \textit{Achievement} \cite{esfinge2011}.
 
 \subsubsection{Conquistas}
 
-\par Ponto: Tem como intenção atribuir determinada quantidade de pontos e seu tipo, por exemplo, uma conquista que atribui 10 pontos de moedas de ouro, onde moedas de ouro são o tipo e 10 os pontos atribuidos. 
+\par Ponto: Tem como intenção atribuir determinada quantidade de pontos e seu tipo, por exemplo, uma conquista que atribui 10 pontos de moedas de ouro, onde moedas de ouro são o tipo e 10 os pontos atribuídos. 
 \par Ranking: Se assemelha a uma hierarquia militar, onde o ranking é de status, não de posições, por exemplo, um usuário possui o status iniciante, quando começa a utilizar a aplicação, e quando realiza algum processo específico, é premiado com o status de intermediário ou avançado. 
 \par Troféu: Pode ser atribuída uma vez apenas, por exemplo, caso um usuário realize um processo e receba o troféu por isto, na próxima vez que realizar o mesmo processo, não receberá outro troféu. 
-\par Reward: É uma conquista que é consumida, semelhante há um cupom de desconto, por exemplo, um reward de bonus de ligações, por padrão será recebido não consumido, quando uma ligação é realizada e este reward utilizado, ele é consumido, e não ficará mais disponível para ser utilizado até que outro seja adquirido.
+\par \textit{Reward}: É uma conquista que é consumida, semelhante há um cupom de desconto, por exemplo, um \textit{reward} de bônus de ligações, por padrão será recebido não consumido, quando uma ligação é realizada e este \textit{reward} utilizado, ele é consumido, e não ficará mais disponível para ser utilizado até que outro seja adquirido.
 
 \subsection{Esfinge Guardian}
+
+\par O framework Esfinge Guardian é uma ferramenta para a aplicação de autorizações em \textit{softwares}, seguindo a filosofia do Esfinge Project, citado anteriormente. Este framework aplica os seguintes modelos de controle de acesso:
+\begin{itemize}
+    \item ABAC: Attribute Based Access Control é um controle de acesso lógico que verifica atributos de objetos, em um determinado ambiente e assunto, para validar se o objeto poderá ou não realizar o acesso naquela situação baseado nas politicas definidas \cite{hu2015attribute}
+    \item MAC: Mandatory access control é um controle de acesso que é definido por apenas uma entidade no sistema, e apenas esta entidade pode realizar a alteração das permissões definidas, geralmente este tipo de controle de acesso é utilizado para informações sensíveis, é semelhante a um sistema militar \cite{lindqvist2006mandatory}.
+    \item RBAC: \textit{Role-based access control} é uma forma de controle de acessos baseado em funções, isto é, cada objeto (este podendo ser um usuário ou um ativo), possui uma ou mais funções que o permitem realizar determinados processos de acordo com seu nível hierárquico, semelhante a uma empresa \cite{sandhu2000nist}.
+\end{itemize}
