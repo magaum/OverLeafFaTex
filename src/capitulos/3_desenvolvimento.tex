@@ -2,5 +2,17 @@
 \chapter{Desenvolvimento}
 \label{ch:desenvolvimento}
 
-\section{Desenvolvimento dessa section}
-\par Este capítulo apresenta o processo de desenvolvimento da solução proposta. Seu conteúdo pode variar, dependendo da metodologia adotada.
+\par Este capítulo irá detalhar como as funcionalidades de autorização foram desenvolvidas para o framework Esfinge Gamification.
+
+\section{Método \textit{getAllAchievements}}
+\par Foi criado um método para recuperar todos as conquistas por tipo, como a próxima listagem irá exibir, este método recebe como parâmetro uma classe que estenda a classe abstrata \textit{Achievement}, portanto uma conquista, a partir deste parâmetro as conquistas serão recuperadas. A utilidade deste método é o auxilio na criação de rankings e/ou a comparações entre todos os usuários.
+
+\begin{figure}[H]
+    \centering
+    \begin{lstlisting}
+public abstract Map<String, Achievement> getAllAchievements(Class<? extends Achievement> type);
+\end{lstlisting}
+    \caption{Método \textit{getAllAchievements}}
+    \label{fig:my_label}
+\end{figure}
+
