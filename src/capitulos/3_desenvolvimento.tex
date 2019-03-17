@@ -2,7 +2,9 @@
 \chapter{Desenvolvimento}
 \label{ch:desenvolvimento}
 
-\par Este capítulo irá detalhar como as funcionalidades de autorização foram desenvolvidas para o framework Esfinge Gamification.
+\par Este capítulo irá detalhar como as novas funcionalidades foram desenvolvidas para o framework Esfinge Gamification.
+
+\par Como o Esfinge Gamification é utilizado por outros desenvolvedores, o projeto \textbf{DrawableNNAPI}\footnote{O projeto está disponível em: https://gitlab.com/django-livre/DrawRestfulAPI} foi desenvolvido a fim de identificar possíveis melhorias e/ou novas funcionalidades que poderiam ser realizadas no framework .
 
 \section{Método \textit{getAllAchievements}}
 \par Foi criado um método para recuperar todos as conquistas por tipo, como a próxima listagem irá exibir, este método recebe como parâmetro uma classe que estenda a classe abstrata \textit{Achievement}, portanto uma conquista, a partir deste parâmetro as conquistas serão recuperadas. A utilidade deste método é o auxilio na criação de rankings e/ou a comparações entre todos os usuários.
@@ -13,7 +15,7 @@
 public abstract Map<String, Achievement> getAllAchievements(Class<? extends Achievement> type);
 \end{lstlisting}
     \caption{Método \textit{getAllAchievements}}
-    \label{fig:my_label}
+    \label{fig:metodo getAllAchievement}
 \end{figure}
 
 \par paragrafo teste
