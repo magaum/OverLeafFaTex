@@ -28,7 +28,7 @@
 \usepackage{minibox}
 \usepackage{listings}
 \usepackage{multirow}           % Habilita o Merge de celulas na table
-
+\usepackage{longtable}
 % ---
 % Alterações no modelo original da abnTex2
 % ---
@@ -227,24 +227,63 @@
 
 % \lstset{escapechar=@,style=customc}
 
+% java colors
 \definecolor{pblue}{rgb}{0.13,0.13,1}
 \definecolor{pgreen}{rgb}{0,0.5,0}
 \definecolor{pred}{rgb}{0.9,0,0}
 \definecolor{pgrey}{rgb}{0.46,0.45,0.48}
 \definecolor{jpurple}{rgb}{0.5,0,0.35}
 
-\lstset{language=Java,
-  showspaces=false,
-  showtabs=false,
-  breaklines=true,
-  showstringspaces=false,
-  breakatwhitespace=true,
-  commentstyle=\color{pgreen},
-  keywordstyle=\color{jpurple},
-  stringstyle=\color{pred},
-  basicstyle=\ttfamily,
-  keywordsprefix={\@}
+%xml colors
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstdefinestyle{shared}{
+    showspaces=false,
+    extendedchars=true,
+    showtabs=false,
+    breaklines=true,
+    numbers=left,
+    numberstyle=\footnotesize,
+    numbersep=9pt,
+    showstringspaces=false,
+    breakatwhitespace=true,
+    basicstyle=\footnotesize\ttfamily,
+    frame=single
 }
+
+\lstdefinestyle{xml}
+{
+    style=shared,
+    language={XML},
+    morestring=[b]",
+    morestring=[s]{>}{<},
+    morecomment=[s]{<?}{?>},
+    commentstyle=\color{gray}\upshape,
+    columns=fullflexible,
+    stringstyle=\color{black},
+    tagstyle=\color{darkblue},
+    keywordstyle=\color{cyan},
+    morekeywords={type, name, length, table, catalog}
+}
+
+\lstdefinestyle{java}{
+    style=shared,
+    language={Java},
+    commentstyle=\color{pgreen},
+    keywordstyle=\color{jpurple},
+    stringstyle=\color{pred},
+    keywordsprefix={\@}
+}
+
+\lstnewenvironment{xml}
+{\lstset{style=xml}}
+{}
+
+\lstnewenvironment{java}
+{\lstset{style=java}}
+{}
 
 % ---
 
