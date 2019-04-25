@@ -56,9 +56,9 @@
 \end{figure}
 %, assim processos podem ser realizados de forma transparente aos dois pontos (o cliente que invocou o método e o objeto que foi invocado). 
 
-\par Quando o cliente (Figura \ref{fig:proxy-pattern}) realiza chamadas de métodos do objeto real (encapsulado), estas são enviadas ao \textit{proxy} primeiramente, 
-ou seja, todas as execuções dos métodos do objeto encapsulado são interceptadas pelo \textit{proxy}. Na execução do \textit{proxy} qualquer lógica pode ser aplicada, como validações ou chamadas de outros métodos. Ao final da execução das lógicas definidas no \textit{proxy} a responsabilidade é devolvida ao objeto encapsulado.
-%PD, é um recurso disponibilizado pela API \textit{reflection}, a fim de interceptar invocações de objetos como apresentado na \ref{fig:proxy-dinamico}
+\par Quando o cliente (Figura \ref{fig:proxy-pattern}) realiza chamadas de métodos do assuntoReal (objeto encapsulado), estas são enviadas ao \textit{proxy} primeiramente, 
+portanto, todas as execuções de métodos do objeto encapsulado são interceptadas pelo \textit{proxy}. Na execução do \textit{proxy} qualquer lógica pode ser aplicada, como validações ou chamadas de outros métodos. Ao final da execução das lógicas definidas no \textit{proxy}, a responsabilidade é devolvida ao objeto encapsulado. Um problema na utilização de \textit{proxies} é a dependência da interface, pois caso outro objeto precise ser encapsulado sua interface também precisa ser implementada, ou seja, outro \textit{proxy} deverá ser criado.
+PD, é um recurso disponibilizado pela API reflexão (\textit{reflection}) do Java, a fim de interceptar invocações de objetos como apresentado na \ref{fig:proxy-dinamico} 
 
 \subsection{Anotação}
 
