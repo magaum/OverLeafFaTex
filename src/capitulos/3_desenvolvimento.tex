@@ -63,8 +63,9 @@ public class GameProxy implements InvocationHandler {
     }
 }
     \end{java}
-    \caption{Caption}
+    \caption{Criação do \textit{proxy} dinâmico do Esfinge Gamification}
     \label{fig:esfinge-proxy}
+    \fonte{Produção do autor}
 \end{figure}
 
 
@@ -103,6 +104,7 @@ Após a validação o fluxo de execução é devolvido para o Esfinge Gamificati
     \end{java}
     \caption{Configuração e utilização do \textit{framework}}
     \label{fig:hello-world-gamification}
+    \fonte{Produção do autor}
 \end{figure}
 
 Neste exemplo o usuário atual tenta alterar seus pontos e recebe a exceção \textit{"Unauthorized Access"} do pacote \textit{org.esfinge.guardian.exception.AuthorizationException} devido a falta do Ranking necessário, a Figura \ref{fig:execao-configuracao} exibe a configuração realizada na classe \textit{User} para que a autorização seja monitorada pelo Esfinge Guardian.
@@ -137,6 +139,7 @@ Neste exemplo o usuário atual tenta alterar seus pontos e recebe a exceção \t
     \end{java}
     \caption{Configuração de segurança da classe \textit{User}}
     \label{fig:execao-configuracao}
+    \fonte{Produção do autor}
 \end{figure}
 
 \section{Funcionalidades}
@@ -164,5 +167,6 @@ Anotação & Comportamento \\ \hline
 @AllowTrophy, @DenyTrophy & Estas anotações verificam o acesso de usuários a recursos protegidos com a restrição de troféu, isto é, quando algum usuário possuir o troféu conseguirá ou não acessar o recurso. \\ \hline
 @AllowReward, @DenyReward & Estas anotações verificam o acesso de usuários a recursos protegidos com a restrição de recompensa, isto é, quando algum usuário possuir o recompensa conseguirá ou não acessar o recurso. \\ \hline
 \caption{Anotações de autorização}
+\fonte{Produção do autor}
 \label{tab:autorizacoes}\\
 \end{longtable}

@@ -12,7 +12,7 @@
     \includegraphics[scale=0.2]{src/imagens/cap1/ambiente-java.png}
     \caption{Ambiente Java}
     \label{fig:ambiente java}
-    \fonte{Adaptado de \citeonline{introductionToTheJavaProgrammingEnvironment}}
+    \fonte{Adaptado de \citeonline{javaprogrammingenvioronment2010}}
 \end{figure}
 
 \par É uma linguagem fortemente tipada, isto é, as características das variáveis tem que ser definidas em tempo de compilação. Ela possui um coletor de lixo (\textit{garbage collector}) para evitar problemas de segurança como \textit{deadlock}. \cite{joy2000java}
@@ -58,7 +58,90 @@
 
 \par Quando o cliente (Figura \ref{fig:proxy-pattern}) realiza chamadas de métodos do assuntoReal (objeto encapsulado), estas são enviadas ao \textit{proxy} primeiramente, 
 portanto, todas as execuções de métodos do objeto encapsulado são interceptadas pelo \textit{proxy}. Na execução do \textit{proxy} qualquer lógica pode ser aplicada, como validações ou chamadas de outros métodos. Ao final da execução das lógicas definidas no \textit{proxy}, a responsabilidade é devolvida ao objeto encapsulado. Um problema na utilização de \textit{proxies} é a dependência da interface, pois caso outro objeto precise ser encapsulado sua interface também precisa ser implementada, ou seja, outro \textit{proxy} deverá ser criado.
-PD, é um recurso disponibilizado pela API reflexão (\textit{reflection}) do Java, a fim de interceptar invocações de objetos como apresentado na \ref{fig:proxy-dinamico} 
+
+\par PD é um recurso disponibilizado pela API reflexão (\textit{reflection}) do Java, a fim de interceptar invocações de objetos de forma semelhante ao padrão de projeto \textit{proxy} apresentado na Figura \ref{fig:proxy-pattern}, entretanto sua principal diferença é que objetos com qualquer interface podem ser interceptados, devido a forma de criação do \textit{proxy} dinâmico pela JVM a partir do método estático \textit{newProxyInstance} da classe \textit{Proxy}, que devolve uma instância que será utilizada no lugar do objeto encapsulado com os parâmetros passados para este método, a Figura \ref{fig:proxy-dinamico} exemplifica o funcionamento de um \textit{proxy} dinâmico. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{src/imagens/cap2/funcionamento-proxy-dinamico.png}
+    \caption{Funcionamento do \textit{proxy} dinâmico}
+    \label{fig:proxy-dinamico}
+    \fonte{\cite{guerra2014componentes}}
+\end{figure}
+
+\par O método estático criaProxyDinamico da Figura \ref{fig:cria-proxy-dinamico} recebe um objeto como parâmetro (linha 8), e ele é encapsulado de acordo com a ideia do padrão de projeto \textit{proxy} na linha 12, a partir da criação de uma nova instância da classe atual (ProxyDinamicoExemplo). Com essa nova instância, o método construtor privado localizado na linha 4 é invocado, e nele, a referência do objeto recebido na linha 8 é encapsulada. O retorno do método criaProxyDinamico é o objeto encapsulado pelo \textit{proxy} dinâmico, a partir dos parâmetros passados para o método estático \textit{newProxyInstance}. Este recebe três parâmetros: 1) \textit{ClassLoader} do objeto; 2) Interfaces do objeto; 3) Uma instância da implementação de \textit{InvocationHandler}; O proxy dinâmico é criado com esses parâmetros pela JVM conforme já dito, e todas invocações do objeto são interceptadas pelo terceiro parâmetro passado na instância do \textit{proxy}, que é uma implementação de \textit{InvocationHandler}, neste exemplo a própria classe ProxyDinamicoExemplo.
+
+\begin{figure}[H]
+    \centering
+    \begin{java}
+public class ProxyDinamicoExemplo implements InvocationHandler {
+    	private Object objetoEncapsulado;
+
+	private ProxyDinamicoExemplo(Object objetoEncapsulado) {
+		this.objetoEncapsulado = objetoEncapsulado;
+	}
+//Recupera ClassLoader e interfaces do objeto passado como parametro via reflexao
+	public static <T> T criaProxyDinamico(Object object) {
+		return (T) Proxy.newProxyInstance(
+        		object.getClass().getClassLoader(),
+        		object.getClass().getInterfaces(),
+        		new ProxyDinamicoExemplo(object)
+		);
+	}
+//Implementacao do metodo Invoker omitido
+}
+    \end{java}
+    \caption{Criação do \textit{proxy} dinâmico}
+    \label{fig:cria-proxy-dinamico}
+    \fonte{Produção do autor}
+\end{figure}
+
+
+\par A interface \textit{InvocationHandler} do pacote \textit{java.lang.reflect} define um método apenas, o \textit{Invoke}, vide Figura \ref{fig:invoke-implementacao}, este método é executado antes de qualquer invocação do objeto encapsulado no processo anterior de criação do \textit{proxy}.
+
+\begin{figure}[H]
+    \centering
+\begin{java}
+public class ProxyDinamicoExemplo implements InvocationHandler {
+//encapsulamento do objeto e metodo de criacao do proxy omitidos
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		Class clazz = this.getClass();
+		Logger.getLogger(clazz.getName())
+		    .log(
+                        Level.INFO, "Metodo " +
+                        method.getName() + 
+                        " interceptado pelo proxy dinamico " +
+                        clazz.getSimpleName()
+		    );
+		Object resultadoDaInvocacao = method.invoke(objetoEncapsulado, args);
+		return resultadoDaInvocacao;
+	}
+}
+\end{java}
+\caption{Implementação da interface \textit{InvocationHanlder}}
+    \label{fig:invoke-implementacao}
+    \fonte{Produção do autor}
+\end{figure}
+
+\par A cada invocação do objeto encapsulado, o método \textit{invoke} é executado antes, de acordo com a Figura \ref{fig:invoke-registrando-log} onde é possível verificar a criação do \textit{proxy} dinâmico na linha 4, onde o método criaProxyDinamico da Figura \ref{fig:cria-proxy-dinamico} é chamado, retornando um \textit{proxy} do tipo \textit{Executor}. Este possui o método \textit{executionTime} que retorna uma instância de \textit{java.util.Date}. Quando este é invocado, logs são criados conforme linha 6 da Figura \ref{fig:invoke-implementacao}, esta linha exibe o método interceptado e nome do \textit{proxy}. Sempre que o objeto \textit{executor} (objeto encapsulado) for invocado, um log será gerado.
+
+\begin{figure}[H]
+    \centering
+    \begin{java}
+public class App {
+	public static void main(String[] args) {
+	
+		Executor executor = ProxyDinamicoExemplo.criaProxyDinamico(new ExecutandoProxyDinamico());
+		System.out.println(executor.executionTime());
+	}
+}
+    \end{java}
+    \includegraphics[scale=0.4]{src/imagens/cap2/invoke-registrando-log.png}
+    \caption{Registros da invocação interceptada}
+    \label{fig:invoke-registrando-log}
+    \fonte{Produção do autor}
+\end{figure}
 
 \subsection{Anotação}
 
@@ -161,7 +244,7 @@ Baseado nisso \textit{frameworks} permitem que aplicações com estruturas semel
     \includegraphics[scale=0.2]{src/imagens/cap2/arquitetura-spring-traduzida.png}
     \caption{Inversão de controle}
     \label{fig:inversao-controle}
-    \fonte{Origem \cite{spring-mvc-architecture}}
+    \fonte{Origem \citeonline{spring-mvc-architecture}}
 \end{figure}
 
 \subsection{Frameworks baseados em Reflexão e Metadados}
@@ -245,11 +328,11 @@ O uso de anotações é chamado de programação orientada a atributos \cite{bus
 
 \par Esfinge Project\footnote{O projeto está disponível no endereço: http://esfinge.sf.net.} é um projeto \textit{open-source} iniciado em 2011 por Dr. Eduardo Guerra junto a GSW, que tem como objetivo a criação de soluções reutilizáveis para um desenvolvimento ágil, um produto final flexível e de fácil manutenção.
 \par O projeto disponibiliza 9 frameworks até o momento, estes são: QueryBuilder, Comparison, Guardian, AOM Role Mapper, SystemGlue, Gamification, Metadata, Classmock, ReTest.
-\par Todos os frameworks citados acima seguem uma filosofia que consiste em: Configuração de metadados para que o comportamento desejado ocorra; Componentes que podem ser integrados a aplicações de forma simples; Pontos de extensão para criação de novas funcionalidades; Remover a preocupação com a solução que o framework disponibiliza, permitindo que o desenvolvedor foque apenas em sua aplicação específica \cite{esfinge2011}.
+\par Todos os frameworks citados acima seguem uma filosofia que consiste em: Configuração de metadados para que o comportamento desejado ocorra; Componentes que podem ser integrados a aplicações de forma simples; Pontos de extensão para criação de novas funcionalidades; Remover a preocupação com a solução que o framework disponibiliza, permitindo que o desenvolvedor foque apenas em sua aplicação específica \citeonline{esfingeproject2011}.
 
 \subsection{Esfinge Gamification}
 
-\par O Esfinge Gamification\footnote{A documentação do projeto está disponível no endereço: http://esfinge.sourceforge.net/Gamification.html.} é um \textit{framework} que aplica lógica gamificação para \textit{softwares} que necessitam destes processos. Independente do domínio do \textit{software} é possível utilizar o \textit{framework}, pois este é desacoplado de lógicas da aplicação, sua responsabilidade é a tratativa dos dados de gamificação, portanto, pode ser integrado a qualquer programa Java, permitindo que o desenvolvedor foque na solução que está trabalhando, e deixe as responsabilidades de gamificação para o \textit{framework}  \cite{esfinge2011}.
+\par O Esfinge Gamification\footnote{A documentação do projeto está disponível no endereço: http://esfinge.sourceforge.net/Gamification.html.} é um \textit{framework} que aplica lógica gamificação para \textit{softwares} que necessitam destes processos. Independente do domínio do \textit{software} é possível utilizar o \textit{framework}, pois este é desacoplado de lógicas da aplicação, sua responsabilidade é a tratativa dos dados de gamificação, portanto, pode ser integrado a qualquer programa Java, permitindo que o desenvolvedor foque na solução que está trabalhando, e deixe as responsabilidades de gamificação para o \textit{framework}  \citeonline{esfingegamification2011}.
 
 %conforme Figura \ref{fig:esfinge-gamification-plugado}
 %\begin{figure}[H]
@@ -274,7 +357,7 @@ Anotação & Comportamento \\ \hline
 }
 \caption{Anotações disponibilizadas pelo Esfinge Gamification}
     \label{tab:anotacoes-gamification}
-    \fonte{Adaptado de \cite{esfingegamification2011}}
+    \fonte{Adaptado de \citeonline{esfingegamification2011}}
 \end{table}
 
 \begin{figure}[H]
@@ -282,6 +365,7 @@ Anotação & Comportamento \\ \hline
     \includegraphics{src/imagens/cap2/estrutura-conquistas.png}
     \caption{Conquistas implementadas no projeto Esfinge Gamification}
     \label{fig:arquitetura-esfinge-gamification}
+    \fonte{\citeonline{esfingegamification2011}}
 \end{figure}
 
 \subsubsection{Características das conquistas disponibilizadas}
@@ -295,7 +379,7 @@ Anotação & Comportamento \\ \hline
 
 \subsection{Pontos de extensão}
 
-O \textit{framework} possui dois pontos de extensão (\textit{hotspots}), onde novos comportamentos podem ser adicionados, quando necessário. Desta forma é possível aplicar outras lógicas de gamificação, implementando a interface \textit{Achievement} (Figura \ref{fig:arquitetura-esfinge-gamification}) disponível no pacote \textit{net.sf.esfinge.gamification.achievement}, caso os comportamentos disponibilizados pelo \textit{framework} não sejam adequados \`a determinada situação. Também é possível adicionar novos comportamentos estendendo a classe abstrata \textit{Game}, disponível no pacote \textit{net.sf.esfinge.gamification.mechanics}, que possui a lógica de gerenciamento dos dados de gamificação e consequentemente o controle das conquistas, isto é, a adição, atualização, consulta e remoção destas. Além de sua forma de armazenamento, que possui implementações para: Arquivo de propriedades; Banco de dados relacional; Banco de dados não relacional; e em memória \cite{esfinge2011}.
+O \textit{framework} possui dois pontos de extensão (\textit{hotspots}), onde novos comportamentos podem ser adicionados, quando necessário. Desta forma é possível aplicar outras lógicas de gamificação, implementando a interface \textit{Achievement} (Figura \ref{fig:arquitetura-esfinge-gamification}) disponível no pacote \textit{net.sf.esfinge.gamification.achievement}, caso os comportamentos disponibilizados pelo \textit{framework} não sejam adequados \`a determinada situação. Também é possível adicionar novos comportamentos estendendo a classe abstrata \textit{Game}, disponível no pacote \textit{net.sf.esfinge.gamification.mechanics}, que possui a lógica de gerenciamento dos dados de gamificação e consequentemente o controle das conquistas, isto é, a adição, atualização, consulta e remoção destas. Além de sua forma de armazenamento, que possui implementações para: Arquivo de propriedades; Banco de dados relacional; Banco de dados não relacional; e em memória \cite{esfingegamification2011}.
 
 
 \subsection{Esfinge Guardian}
