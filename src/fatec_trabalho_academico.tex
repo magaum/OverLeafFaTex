@@ -54,6 +54,19 @@
     \vspace*{1cm}
   \end{capa}
 }
+
+% comando para inserir imagens
+\newcommand{\image}[5]{
+    \begin{figure}[H]
+        \begin{center}
+        \caption{#3}
+        \includegraphics[scale=#1]{#2}
+        \label{#4}
+        \fonte{#5}
+        \end{center}
+    \end{figure}
+}
+
 % ---
 % Alteração na assinatura dos componentes da banca
 \setlength{\ABNTEXsignwidth}{10cm}
