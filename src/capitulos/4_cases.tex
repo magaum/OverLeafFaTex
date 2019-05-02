@@ -14,25 +14,85 @@ Neste capitulo serão apresentados os testes que foram implementados com a solu�
 
 \section{Fluxo de funcionamento}
 
-\par O primeiro caso de teste tem como objetivo mostrar que o Esfinge Guardian não interfere no fluxo de funcionamento do Esfinge Gamification quando não há anotações de segurança. Para validar essa premissa um tópico será adicionado com o usuário teste e este receberá uma mensagem de sucesso, quando o usuário acessar seu perfil poderá visualizar que possui 10 pontos.
+\par O primeiro caso de teste tem como objetivo mostrar que o Esfinge Guardian não interfere no fluxo de funcionamento do Esfinge Gamification quando não há anotações de segurança. Para validar essa premissa um tópico será adicionado com o usuário teste. Quando o usuário acessar seu perfil poderá visualizar que possui agora 10 pontos.
 
-\subsection{Primeira etapa}
-
-\par Nesta etapa o usuário será criado no \textit{site} para que não possua nenhum ponto, a Figura \ref{fig:ct1-passo1-cadastro} exibe o formulário de cadastro com as informações preenchidas.
+\par Na primeira etapa o usuário teste será criado no \textit{site} para que não possua nenhum ponto, a Figura \ref{fig:ct1-passo1-cadastro} exibe o formulário de cadastro com as informações preenchidas.
 
 \begin{image}
 {0.23}
-{src/imagens/cap4/ct1-cadastro-forum.png}
+{src/imagens/cap4/ct1/ct1-cadastro-forum.png}
 {Cadastro no forum}
 {fig:ct1-passo1-cadastro}
 {Produção do autor}
 \end{image}
 
+\par Após o cadastro realizado, o usuário é redirecionado para a página inicial (Figura \ref{fig:pagina-inicial-apos-cadastro}) e clica em "Criar tópico".
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct1/ct1-tela-incial.png}
+{Tela incial após cadastro}
+{fig:pagina-inicial-apos-cadastro}
+{Produção do autor}
+\end{image}
+
+\par Nesta tela, outro formulário é exibido para ser preenchido com as informações relacionadas ao assunto desejado. A Figura \ref{fig:topico-criado} exibe como este formulário foi preenchido.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct1/ct1-topico-criado.png}
+{Primeiro tópico criado pelo usuário teste}
+{fig:topico-criado}
+{Produção do autor}
+\end{image}
+
+\par Após a criação do tópico o usuário é redirecionado para a tela inicial novamente, e seu tópico já está disponível conforme a Figura \ref{fig:tela-inicial-apos-criacao-do-topico} evidencia.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct1/ct1-tela-incial-com-topico-criado.png}
+{Tópico criado pelo usuário teste}
+{fig:tela-inicial-apos-criacao-do-topico}
+{Produção do autor}
+\end{image}
+
+\par A tela do perfil de usuários é exibida quando os botões cinzas com o nome do usuário que criou o tópico são clicados, estes botões ficam disponíveis também em comentários. A Figura \ref{fig:resultado-pontos-apos-criacao-do-topico} confirma a premissa deste teste, exibindo o perfil do usuário teste com 10 pontos após a criação do tópico.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct1/ct1-resultado.png}
+{Resultado obtido após a criação do tópico}
+{fig:resultado-pontos-apos-criacao-do-topico}
+{Produção do autor}
+\end{image}
+
+\par Com as evidências exibidas acima ainda não é possível fazer a identificação de que validações de segurança não foram executadas. Para realizar isto foi preciso verificar os \textit{logs} do servidor. A Figura \ref{fig:ct1-heroku-logs} exibe estes \textit{logs} separados por cores verdes, isto é, a cada linha com o inicio verde onde a data é exibida, um novo \textit{log} foi registrado. O primeiro \textit{log} são registros do clique no botão "Salvar" (Figura \ref{fig:topico-criado}), onde uma requisição do tipo \textit{POST} é feita para que o tópico seja salvo. O segundo \textit{log} é o redirecionamento para a página inicial (Figura \ref{fig:tela-inicial-apos-criacao-do-topico}), onde uma requisição \textit{GET} é feita para recuperação dos tópicos existentes.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct1/ct1-heroku-logs.png}
+{\textit{Logs} do Heroku não exibindo traços de execução do Esfinge Guardian}
+{fig:ct1-heroku-logs}
+{Produção do autor}
+\end{image}
+
+\par De acordo com o previsto na premissa deste teste o usuário recebeu os 10 pontos após a criação do tópico e o Esfinge Guardian não executou nenhuma validação de segurança.
+
+\section{Incremento dos pontos}
+
+\par Este teste tem como objetivo a validação do incremento dos pontos após a criação de tópicos no site. Isto será comprovado a partir do usuário teste utilizado anteriormente, este possui 10 pontos e criará outro tópico, passando a possuir 20 pontos.
+
+
+
 \section{Usuário sem permissão}
 
 \section{Usuário com permissão}
 
+\section{Realizando processo X sem o \textit{Achievement} Y}
+
 \section{Adição do \textit{Achievement} X após a adição de comentários em tópicos}
+
+\section{Processo X com o \textit{Achievement} Y}
 
 \section{Executanto X tarefa com o \textit{Achievement} X}
 
