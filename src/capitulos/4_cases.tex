@@ -10,15 +10,29 @@ Neste capitulo serão apresentados os testes que foram implementados com a solu�
 {Produção do autor}
 \end{image}
 
+\par Esta aplicação possui um \textit{back-end} hospedado no Heroku\footnote{Heroku é um PaaS que significa \textit{Platform as a Service}} no endereço https://forum-back-end.herokuapp.com, os próximos testes abordarão os registros do servidor para confirmar que o Esfinge Guardian realizou as validações esperadas.
 
+\section{Fluxo de funcionamento}
 
-\par O primeiro caso de teste tem como objetivo mostrar que o Esfinge Guardian não interfere no fluxo de funcionamento do Esfinge Gamification quando não há anotações de segurança. Para validar essa premissa um tópico será adicionado com o usuário teste e este receberá uma mensagem de sucesso, quando o usuário acessar seu perfil poderá visualizar que possui atualmente 10 pontos.
+\par O primeiro caso de teste tem como objetivo mostrar que o Esfinge Guardian não interfere no fluxo de funcionamento do Esfinge Gamification quando não há anotações de segurança. Para validar essa premissa um tópico será adicionado com o usuário teste e este receberá uma mensagem de sucesso, quando o usuário acessar seu perfil poderá visualizar que possui 10 pontos.
+
+\subsection{Primeira etapa}
+
+\par Nesta etapa o usuário será criado no \textit{site} para que não possua nenhum ponto, a Figura \ref{fig:ct1-passo1-cadastro} exibe o formulário de cadastro com as informações preenchidas.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct1-cadastro-forum.png}
+{Cadastro no forum}
+{fig:ct1-passo1-cadastro}
+{Produção do autor}
+\end{image}
 
 \section{Usuário sem permissão}
 
 \section{Usuário com permissão}
 
-\section{Adição do \textit{Achievement} X}
+\section{Adição do \textit{Achievement} X após a adição de comentários em tópicos}
 
 \section{Executanto X tarefa com o \textit{Achievement} X}
 

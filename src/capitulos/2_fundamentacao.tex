@@ -124,7 +124,7 @@ public class ProxyDinamicoExemplo implements InvocationHandler {
     \fonte{Produção do autor}
 \end{figure}
 
-\par A cada invocação do objeto encapsulado, o método \textit{invoke} é executado antes, de acordo com a Figura \ref{fig:invoke-registrando-log} onde é possível verificar a criação do \textit{proxy} dinâmico na linha 4, onde o método criaProxyDinamico da Figura \ref{fig:cria-proxy-dinamico} é chamado, retornando um \textit{proxy} do tipo \textit{Executor}. Este possui o método \textit{executionTime} que retorna uma instância de \textit{java.util.Date}. Quando este é invocado, logs são criados conforme linha 6 da Figura \ref{fig:invoke-implementacao}, esta linha exibe o método interceptado e nome do \textit{proxy}. Sempre que o objeto \textit{executor} (objeto encapsulado) for invocado, um log será gerado.
+\par A cada invocação do objeto encapsulado, o método \textit{invoke} é executado antes, de acordo com a Figura \ref{fig:invoke-registrando-log} onde é possível verificar a criação do \textit{proxy} dinâmico na linha 4, onde o método criaProxyDinamico da Figura \ref{fig:cria-proxy-dinamico} é chamado, retornando um \textit{proxy} do tipo \textit{Executor}, este possui o método \textit{executionTime} que retorna uma instância de \textit{java.util.Date}.
 
 \begin{figure}[H]
     \centering
@@ -143,9 +143,11 @@ public class App {
     \fonte{Produção do autor}
 \end{figure}
 
+Quando o PD é invocado, logs são criados conforme linha 6 da Figura \ref{fig:invoke-implementacao}, esta linha exibe o método interceptado e nome do \textit{proxy}. Sempre que o objeto \textit{executor} (objeto encapsulado) for invocado, um log será gerado.
+
 \subsection{Anotação}
 
-\par Anotações em Java, são utilizadas para definição de metadados, isto é, informações sobre algo, estas podem ser inseridas em: Pacotes; Classes; Interfaces; Métodos; Atributos; Parâmetros; Construtores; e em Anotações \citeonline{jcp2005annotation269}. O local onde uma anotação pode ser inserida é definido pela anotação \textit{@Target} que recebe de um a N parâmetros do Enum tipo \textit{java.lang.annotation.ElementType}\footnote{É interessante restringir o local onde as anotações podem ser inseridas para evitar uma má interpretação durante sua recuperação via reflexão}, a Tabela \ref{tab:targets} exibe os parâmetros disponíveis e seu escopo. Quando uma anotação é inserida fora de seu escopo um erro de compilação com a mensagem \textit{"The annotation @NomeDaAnotação is disallowed for this location"} \citeonline{joy2000java}.
+\par Anotações em Java, são utilizadas para definição de metadados, isto é, informações sobre algo, estas podem ser inseridas em: Pacotes; Classes; Interfaces; Métodos; Atributos; Parâmetros; Construtores; e em Anotações \cite{jcp2005annotation269}. O local onde uma anotação pode ser inserida é definido pela anotação \textit{@Target} que recebe de um a N parâmetros do Enum tipo \textit{java.lang.annotation.ElementType}\footnote{É interessante restringir o local onde as anotações podem ser inseridas para evitar uma má interpretação durante sua recuperação via reflexão}, a Tabela \ref{tab:targets} exibe os parâmetros disponíveis e seu escopo. Quando uma anotação é inserida fora de seu escopo um erro de compilação com a mensagem \textit{"The annotation @NomeDaAnotação is disallowed for this location"} \citeonline{joy2000java}.
 
 \begin{table}[H]
     \centering
@@ -345,7 +347,7 @@ O uso de anotações é chamado de programação orientada a atributos \cite{bus
 %    \label{fig:esfinge-ga%mification-plugado}
 %\end{figure}
 
-\par O comportamento do \textit{framework} é especificado via metadados conforme a filosofia dos projetos Esfinge citada anteriormente, estes são anotações que podem ser adicionada em programas Java, a Tabela \ref{tab:anotacoes-gamification} detalha as opções disponíveis. Existem quatro tipos de processos implementados pelo \textit{Framework}, estes são: Ponto, Ranking, \textit{Reward}, Troféu vide Figura \ref{fig:arquitetura-esfinge-gamification}.
+\par O comportamento do \textit{framework} é especificado via metadados conforme a filosofia dos projetos Esfinge citada anteriormente, estes são anotações que podem ser adicionada em programas Java, a Tabela \ref{tab:anotacoes-gamification} detalha as opções disponíveis. Existem quatro tipos de processos implementados pelo \textit{framework}, estes são: Ponto, Ranking, \textit{Reward}, Troféu vide Figura \ref{fig:arquitetura-esfinge-gamification}.
 
 \begin{table}[H]
 \caption{Anotações disponibilizadas pelo Esfinge Gamification}
@@ -662,7 +664,7 @@ Cada anotação encontrada é passada para o processo \textit{createAchievementP
 {src/imagens/cap2/arquitetura-modulos-guardian.png} %relative path
 {Arquitetura dos módulos existêntes no Esfinge Guardian} %caption
 {fig:arquitetura-guardian} %label
-{Adaptado de CITAR O TRABALHO DO JEFERSON LA} %font
+{Adaptado de \citeonline{guerra2017approach}} %font
 \end{image}
 
 \subsubsection{Pontos de extensão}
@@ -680,6 +682,7 @@ public interface Populator {
 }
     \end{java}
     \label{fig:interface-populator}
+    \fonte{Adaptado de \citeonline{esfingeguardian}}
 \end{figure}
 
 \par Além de implementar a interface \textit{Populator} é preciso configurá-la. Atualmente existem duas formas de realizar esta configuração, com a anotação @PopulatorClass ou com o arquivo de configuração chamado \textit{"org.esfinge.guardian.populator.Populator"}. A anotação @PopulatorClass exibida na Figura \ref{fig:populator-class} possui uma propriedade onde o \textit{Populator} implementado é definido para ser recuperado pelo \textit{framework} (linha 3).
