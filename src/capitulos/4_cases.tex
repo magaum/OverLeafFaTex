@@ -1,6 +1,7 @@
 \newpage
 \chapter{Resultados}
-Neste capitulo serão apresentados os testes que foram implementados com a solução e o conteúdo apresentado, a fim de comprovar o funcionamento da integração dos \textit{frameworks}. Foi desenvolvida uma aplicação \textit{web} para utilização dos recursos desenvolvidos, a ideia desta aplicação é ser um fórum para compartilhamento de ideias. Para incentivar a interação entre os usuários as regras da Figura \ref{fig:regras-do-forum} foram definidas, esta página está disponível no endereço https://forum-tg.netlify.com.
+
+\par Neste capitulo serão apresentados os testes implementados com a solução desenvolvida, a fim de validar o funcionamento da integração dos \textit{frameworks}. Foi desenvolvida uma aplicação \textit{web} para utilização dos recursos desenvolvidos, a ideia desta aplicação é ser um fórum para compartilhamento de ideias. Para incentivar a interação entre os usuários as regras da Figura \ref{fig:regras-do-forum} foram definidas, esta página está disponível no endereço https://forum-tg.netlify.com.
 
 \begin{image}
 {0.23}
@@ -14,7 +15,7 @@ Neste capitulo serão apresentados os testes que foram implementados com a solu�
 
 \section{Fluxo de funcionamento}
 
-\par O primeiro caso de teste tem como objetivo mostrar que o Esfinge Guardian não interfere no fluxo de funcionamento do Esfinge Gamification quando não há anotações de segurança. Para validar essa premissa um tópico será adicionado com o usuário teste. Quando o usuário acessar seu perfil poderá visualizar que possui agora 10 pontos.
+\par O primeiro caso de teste tem como objetivo mostrar que o Esfinge Guardian não interfere no fluxo de funcionamento do Esfinge Gamification quando não há anotações de segurança, permitindo que os recursos antigos de gamificação sejam utilizados normalmente. Para validar essa premissa, um tópico será adicionado com o usuário teste. Quando o usuário acessar seu perfil poderá visualizar que possui agora 10 pontos.
 
 \par Na primeira etapa o usuário teste será criado no \textit{site} para que não possua nenhum ponto, a Figura \ref{fig:ct1-passo1-cadastro} exibe o formulário de cadastro com as informações preenchidas.
 
@@ -80,20 +81,139 @@ Neste capitulo serão apresentados os testes que foram implementados com a solu�
 
 \section{Incremento dos pontos}
 
-\par Este teste tem como objetivo a validação do incremento dos pontos após a criação de tópicos no site. Isto será comprovado a partir do usuário teste utilizado anteriormente, este possui 10 pontos e criará outro tópico, passando a possuir 20 pontos.
+\par Este teste tem como objetivo a validação do incremento dos pontos após a criação de tópicos no \textit{site}, para que as restrições possam ser atingidas e novos recursos desbloqueados. Isto será comprovado a partir do usuário teste utilizado anteriormente, este possui 10 pontos e criará outro tópico, passando a possuir 20 pontos.
 
+\par O mesmo processo realizado na Figura \ref{fig:topico-criado} foi realizado, porém o tópico exibido na Figura \ref{fig:ct2-novo-topico} foi criado.
 
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct2/ct2-formulario-novo-topico.png}
+{Formulário preenchido com novo tópico}
+{fig:ct2-novo-topico}
+{Produção do autor}
+\end{image}
+
+\par Retornando ao perfil do usuário é possível verificar que sua pontuação agora é 20, conforme Figura \ref{fig:ct2-pontuacao-atual}.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct2/ct2-resultado.png}
+{Pontuação do usuário teste}
+{fig:ct2-pontuacao-atual}
+{Produção do autor}
+\end{image}
+
+\par O objetivo deste teste também foi atingido, comprovando o incremento das conquistas permitindo assim que as restrições sejam eliminadas conforme a utilização.
 
 \section{Usuário sem permissão}
 
+\par As restrições serão validadas neste caso de teste, em específico a anotação \textit{@AllowPointGreaterThan}, que tem como objetivo controlar o acesso de usuários baseando-se em seus pontos, conforme citado na Tabela \ref{tab:autorizacoes}.
+\par Quando um usuário possuir menos de 50 pontos, de acordo com as regras do fórum (Figura \ref{fig:regras-do-forum}), este não deve conseguir concluir o processo de atualização do tópico. Para realizar este teste o usuário weslei foi definido, ele possui 10 pontos atualmente, tendo criado apenas um tópico no \textit{site}. O conteúdo do tópico será alterado e uma requisição do tipo \textit{PUT} será realizada ao servidor para salvar as alterações. O usuário deverá receber a mensagem de erro "Você não possui permissão para atualizar tópicos!" devido a falta de pontos.
+
+\par Na Figura \ref{fig:ct3-visualizacao-conteudo} o usuário está na página de visualização detalhada do tópico. É importante ressaltar que os botões "Editar" e "Excluir" ficam disponíveis apenas para o proprietário do conteúdo. 
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct3/ct3-visualizacao-conteudo.png}
+{Tela de visualização detalhada de tópicos}
+{fig:ct3-visualizacao-conteudo}
+{Produção do autor}
+\end{image}
+
+\par Quando o botão "Editar" é selecionado os campos do tópico tornam-se editáveis vide Figura \ref{fig:ct3-conteudo-editavel}.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct3/ct3-conteudo-editavel.png}
+{Conteúdo do tópico editável}
+{fig:ct3-conteudo-editavel}
+{Produção do autor}
+\end{image}
+
+\par O botão "Salvar alterações" é selecionado pelo usuário e consequentemente uma requisição \textit{PUT} é feita ao servidor para salvar o conteúdo modificado. As validações são feitas pelo \textit{back-end} e a mensagem de erro "Você não possui permissão para atualizar tópicos!" é exibida ao usuário conforme Figura \ref{fig:ct3-mensagem-de-permissao-negada}
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct3/ct3-mensagem-de-permissao-negada.png}
+{Mensagem de erro exibida ao realizar processo de edição de tópico sem autorização}
+{fig:ct3-mensagem-de-permissao-negada}
+{Produção do autor}
+\end{image}
+
+\par Seguindo o raciocino do primeiro teste, apenas a mensagem de erro no \textit{front-end} não é suficiente para validação. Na Figura \ref{fig:processo-autorizacao-gamification} é citada a criação de \textit{logs} durante a validação do Esfinge Guardian. Estes \textit{logs} são criados justamente para identificação de quando acessos a recursos protegidos são feitos. A Figura \ref{fig:log-nao-autorizado} exibe o \textit{log} registrado no momento da requisição inválida realizada pelo usuário weslei, validando o teste.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct3/ct3-log-nao-autorizado.png}
+{\textit{Log} de falta de autorização ao realizar operação de atualização de tópico}
+{fig:log-nao-autorizado}
+{Produção do autor}
+\end{image}
+
+\par Com a criação de \textit{logs} no Esfinge Gamification foi possível confirmar as premissas definidas neste teste, onde o usuário weslei tentou alterar um tópico criado, porém não possuía pontos suficientes para realizar esta operação.
+
 \section{Usuário com permissão}
 
-\section{Realizando processo X sem o \textit{Achievement} Y}
+\par O objetivo deste caso de teste é a autorização, neste caso o processo feito indevidamente no teste anterior será executado novamente com o usuário weslei, porém este possuirá 50 pontos e tentará alterar o mesmo tópico. É esperado que as alterações sejam realizadas com sucesso e que \textit{logs} sejam registrados pelo servidor para confirmação da validação do Esfinge Guardian.
 
-\section{Adição do \textit{Achievement} X após a adição de comentários em tópicos}
+\par Como o incremento das conquistas já foi testado e para agilizar o processo da criação do teste, o ambiente foi alterado para atender este requisito, conforma Figura \ref{fig:pontuacao-weslei} exibe.
 
-\section{Processo X com o \textit{Achievement} Y}
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct4/ct4-pontuacao-weslei.png}
+{Pontuação do usuário weslei}
+{fig:pontuacao-weslei}
+{Produção do autor}
+\end{image}
 
-\section{Executanto X tarefa com o \textit{Achievement} X}
+\par Novamente o tópico foi selecionado e alterado conforme Figura \ref{fig:ct4-alteracoes-topico}.
 
-\subsection{Matriz DSM}
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct4/ct4-alteracoes-topico.png}
+{Alterações realizadas no tópico}
+{fig:ct4-alteracoes-topico}
+{Produção do autor}
+\end{image}
+
+\par O botão "Salvar alterações" é selecionado e o tópico é alterado com sucesso conforme exibido na Figura \ref{fig:ct4-alteracoes-topico}.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct4/ct4-alteracoes-ok.png}
+{Pontuação do usuário weslei}
+{fig:ct4-alteracoes-ok}
+{Produção do autor}
+\end{image}
+
+\par No servidor é possível identificar a verificação realizada pelo Esfinge Guardian. A Figura \ref{fig:ct4-validacao-guardian} exibe os \textit{logs} registrados.
+
+\begin{image}
+{0.23}
+{src/imagens/cap4/ct4/ct4-validacao-guardian.png}
+{Pontuação do usuário weslei}
+{fig:ct4-validacao-guardian}
+{Produção do autor}
+\end{image}
+
+\par Como esperado, o servidor registrou \textit{logs} validando a requisição feita pelo usuário weslei, comprovando que o Esfinge Guardian analisou os dados de gamificação para autorizar a requisição. Um ponto interessante deste \textit{log}, é que a mensagem retornada pelo Esfinge Guardian referente a requisição \textit{PUT} é exibida antes do \textit{log} da própria requisição, o que pode gerar confusão. Entretanto o \textit{log} de validação registrado pelo Esfinge Guardian é relativo ao processo de autorização desencadeado pela requisição \textit{PUT}, realizada pelo usuário weslei.
+
+%\section{Realizando processo X sem o \textit{Achievement} Y}
+
+%\section{Adição do \textit{Achievement} X após a adição de comentários em tópicos}
+
+%\section{Processo X com o \textit{Achievement} Y}
+
+%\section{Executanto X tarefa com o \textit{Achievement} X}
+
+\section{Matriz de Dependência Estrutural}
+
+\par Matriz de Dependência Estrutural, do inglês \textit{Dependency Structure Matrix} (DSM), tem como objetivo facilitar a visualização entre as dependências do projeto, o acoplamento entre as classes. Neste caso o que será abordado é o desacoplamento envolvendo o Esfinge Gamification, que foi utilizado na classe \textit{GameSetup}, presente no pacote \textit{br.inpe.forum.gamification}. É possível visualizar na Figura \ref{fig:dsm-classes} que esta classe depende apenas de \textit{MongoFactory}, devido a identificação amarela a sua esquerda. Já as classes que dependem de \textit{GameSetup} são os \textit{controllers} do \textit{site}, devido a sua responsabilidade, que é a tratativa das requisições. Este foi o ponto ideal para a interceptação de invocações, pois quando a lógica de negócios será chamada pela camada de serviço (pacote \textit{br.inpe.forum.service}) os metadados definidos são lidos e o \textit{framework} realiza o comportamento esperado, exibido nos testes anteriores.
+
+\begin{image}
+{0.32}
+{src/imagens/cap4/dsm-classes-forum.png}
+{DSM do projeto desenvolvido}
+{fig:dsm-classes}
+{Produção do autor}
+\end{image}
