@@ -1,3 +1,23 @@
 \newpage
 \chapter{Conclus\~ao}
-\par Conclusao para o trabalho, mostra como a solu\~c\~ao proposta cumpre com o que foi apresentado anteriormente.
+
+\par Baseado na DSM apresentada no capítulo anterior, é possível concluir que o \textit{framework} possui baixo acoplamento com a solução desenvolvida, sendo utilizado apenas em uma classe para configuração e por classes com responsabilidades de \textit{controller}, portanto, esta solução pode ser aplicada em diversos \textit{softwares} devido a sua generalização. Também é possível identificar que a integração foi um sucesso, pois em nenhum momento durante a criação do \textit{back-end} foi preciso conhecer alguma funcionalidade do Esfinge Guardian. A única API utilizada diretamente foi o Esfinge Gamification, seus metadados e seu PD. O Esfinge Guardian é executado de forma transparente, não é preciso conhecer seu funcionamento para utilizá-lo com a integração criada, diminuindo a curva de aprendizagem do desenvolvedor e aumentando sua produtividade. Desta forma é possível dizer que como o \textit{framework} é genérico e desacoplado de domínio ele pode ser facilmente inserido como uma dependência e utilizado em diversas aplicações sem dificuldades.
+
+\section{Contribuições do Trabalho}
+
+\par Com este Trabalho recursos de controle de acesso foram adicionados ao Esfinge Gamification. Assim como metadados para utilização destes recursos
+
+\section{Dificuldades}
+
+\par Entender que códigos são dados e podem ser interpretados e processados não é algo trivial, assim a compreensão do paradigma reflexivo gera confusão no primeiro momento, pela inversão de pensamento que precisa existir (Figura \ref{fig:introspeccao-flow}), muitas vezes parâmetros recebidos em métodos são classes, e a partir disso a ação desejada ocorre. Ter noção de quando usar reflexão é algo interessante, pois como é um recurso caro computacionalmente falando, quando deseja-se alta performance esta não é uma boa alternativa.
+
+\par A estrutura de diretórios referente as implementações de \textit{Populator} também foi uma dificuldade, devido ao não armazenamento destes arquivos na exportação do projeto Esfinge Guardian. Desta forma era necessário criar a árvore de diretórios em todos os projetos novamente, porém quando estes eram exportados não funcionavam conforme o esperado. Este problema foi solucionado com configurações criadas no arquivo de configuração POM.xml, onde ficam armazenadas as dependências e configurações de projetos com o gerenciador de dependências Maven. Após esta configuração foi verificado que apenas alterando a estrutura de diretórios de acordo com a Figura \ref{fig:populator-flow} os arquivos seriam exportados com o projeto.
+
+\section{Trabalhos futuros}
+
+\begin{itemize}
+    \item Seria interessante o método que recupera todas as conquistas por tipo existente no \textit{framework} possuir uma forma de ordenação, para no caso da criação de \textit{rankings} de posições por exemplo;
+    \item Adição de funcionalidades de bônus, isto é, quando os bônus são executados o dobro de pontos ou conquistas diferentes são recebidas;
+    \item Adição de anotações de eventos, pois atualmente o Esfinge Gamification possui duas anotações para eventos.
+    
+\end{itemize}

@@ -108,9 +108,9 @@
 \section{Usuário sem permissão}
 
 \par As restrições serão validadas neste caso de teste, em específico a anotação \textit{@AllowPointGreaterThan}, que tem como objetivo controlar o acesso de usuários baseando-se em seus pontos, conforme citado na Tabela \ref{tab:autorizacoes}.
-\par Quando um usuário possuir menos de 50 pontos, de acordo com as regras do fórum (Figura \ref{fig:regras-do-forum}), este não deve conseguir concluir o processo de atualização do tópico. Para realizar este teste o usuário weslei foi definido, ele possui 10 pontos atualmente, tendo criado apenas um tópico no \textit{site}. O conteúdo do tópico será alterado e uma requisição do tipo \textit{PUT} será realizada ao servidor para salvar as alterações. O usuário deverá receber a mensagem de erro "Você não possui permissão para atualizar tópicos!" devido a falta de pontos.
+\par Quando um usuário possuir menos de 50 pontos, de acordo com as regras do fórum (Figura \ref{fig:regras-do-forum}), este não deve conseguir concluir o processo de atualização do tópico. Para realizar este teste o usuário weslei foi definido, ele possui 10 pontos atualmente, tendo criado apenas um tópico no \textit{site}. O conteúdo do tópico será alterado e uma requisição do tipo \textit{PUT} será realizada ao servidor para salvar as alterações. O usuário deverá receber a mensagem de erro "Você não possui permissão para atualizar tópicos!"\ devido a falta de pontos.
 
-\par Na Figura \ref{fig:ct3-visualizacao-conteudo} o usuário está na página de visualização detalhada do tópico. É importante ressaltar que os botões "Editar" e "Excluir" ficam disponíveis apenas para o proprietário do conteúdo. 
+\par Na Figura \ref{fig:ct3-visualizacao-conteudo} o usuário está na página de visualização detalhada do tópico. É importante ressaltar que os botões "Editar"\ e "Excluir"\ ficam disponíveis apenas para o proprietário do conteúdo. 
 
 \begin{image}
 {0.23}
@@ -120,7 +120,7 @@
 {Produção do autor}
 \end{image}
 
-\par Quando o botão "Editar" é selecionado os campos do tópico tornam-se editáveis vide Figura \ref{fig:ct3-conteudo-editavel}.
+\par Quando o botão "Editar"\ é selecionado os campos do tópico tornam-se editáveis vide Figura \ref{fig:ct3-conteudo-editavel}.
 
 \begin{image}
 {0.23}
@@ -130,7 +130,7 @@
 {Produção do autor}
 \end{image}
 
-\par O botão "Salvar alterações" é selecionado pelo usuário e consequentemente uma requisição \textit{PUT} é feita ao servidor para salvar o conteúdo modificado. As validações são feitas pelo \textit{back-end} e a mensagem de erro "Você não possui permissão para atualizar tópicos!" é exibida ao usuário conforme Figura \ref{fig:ct3-mensagem-de-permissao-negada}
+\par O botão "Salvar alterações"\ é selecionado pelo usuário e consequentemente uma requisição \textit{PUT} é feita ao servidor para salvar o conteúdo modificado. As validações são feitas pelo \textit{back-end} e a mensagem de erro "Você não possui permissão para atualizar tópicos!" é exibida ao usuário conforme Figura \ref{fig:ct3-mensagem-de-permissao-negada}
 
 \begin{image}
 {0.23}
@@ -140,7 +140,7 @@
 {Produção do autor}
 \end{image}
 
-\par Seguindo o raciocino do primeiro teste, apenas a mensagem de erro no \textit{front-end} não é suficiente para validação. Na Figura \ref{fig:processo-autorizacao-gamification} é citada a criação de \textit{logs} durante a validação do Esfinge Guardian. Estes \textit{logs} são criados justamente para identificação de quando acessos a recursos protegidos são feitos. A Figura \ref{fig:log-nao-autorizado} exibe o \textit{log} registrado no momento da requisição inválida realizada pelo usuário weslei, validando o teste.
+\par Seguindo o raciocínio do primeiro teste, apenas a mensagem de erro no \textit{front-end} não é suficiente para validação. Na Figura \ref{fig:processo-autorizacao-gamification} é citada a criação de \textit{logs} durante a validação do Esfinge Guardian. Estes \textit{logs} são criados justamente para identificação de quando acessos a recursos protegidos são feitos. A Figura \ref{fig:log-nao-autorizado} exibe o \textit{log} registrado no momento da requisição inválida realizada pelo usuário weslei, validando o teste.
 
 \begin{image}
 {0.23}
@@ -176,7 +176,7 @@
 {Produção do autor}
 \end{image}
 
-\par O botão "Salvar alterações" é selecionado e o tópico é alterado com sucesso conforme exibido na Figura \ref{fig:ct4-alteracoes-topico}.
+\par O botão "Salvar alterações"\ é selecionado e o tópico é alterado com sucesso conforme exibido na Figura \ref{fig:ct4-alteracoes-topico}.
 
 \begin{image}
 {0.23}
@@ -198,22 +198,16 @@
 
 \par Como esperado, o servidor registrou \textit{logs} validando a requisição feita pelo usuário weslei, comprovando que o Esfinge Guardian analisou os dados de gamificação para autorizar a requisição. Um ponto interessante deste \textit{log}, é que a mensagem retornada pelo Esfinge Guardian referente a requisição \textit{PUT} é exibida antes do \textit{log} da própria requisição, o que pode gerar confusão. Entretanto o \textit{log} de validação registrado pelo Esfinge Guardian é relativo ao processo de autorização desencadeado pela requisição \textit{PUT}, realizada pelo usuário weslei.
 
-%\section{Realizando processo X sem o \textit{Achievement} Y}
-
-%\section{Adição do \textit{Achievement} X após a adição de comentários em tópicos}
-
-%\section{Processo X com o \textit{Achievement} Y}
-
-%\section{Executanto X tarefa com o \textit{Achievement} X}
-
 \section{Matriz de Dependência Estrutural}
 
-\par Matriz de Dependência Estrutural, do inglês \textit{Dependency Structure Matrix} (DSM), tem como objetivo facilitar a visualização entre as dependências do projeto, o acoplamento entre as classes. Neste caso o que será abordado é o desacoplamento envolvendo o Esfinge Gamification, que foi utilizado na classe \textit{GameSetup}, presente no pacote \textit{br.inpe.forum.gamification}. É possível visualizar na Figura \ref{fig:dsm-classes} que esta classe depende apenas de \textit{MongoFactory}, devido a identificação amarela a sua esquerda. Já as classes que dependem de \textit{GameSetup} são os \textit{controllers} do \textit{site}, devido a sua responsabilidade, que é a tratativa das requisições. Este foi o ponto ideal para a interceptação de invocações, pois quando a lógica de negócios será chamada pela camada de serviço (pacote \textit{br.inpe.forum.service}) os metadados definidos são lidos e o \textit{framework} realiza o comportamento esperado, exibido nos testes anteriores.
+\par Matriz de Dependência Estrutural, do inglês \textit{Dependency Structure Matrix} (DSM), tem como objetivo facilitar a visualização entre as dependências do projeto, o acoplamento entre as classes. Neste caso o que será abordado é o desacoplamento envolvendo o Esfinge Gamification, que foi utilizado na classe \textit{GameSetup}, presente no pacote \textit{br.inpe.forum.gamification}. É possível visualizar na Figura \ref{fig:dsm-classes} que esta classe depende apenas de \textit{MongoFactory}, devido a identificação amarela a sua esquerda. Já as classes que dependem de \textit{GameSetup} são os \textit{controllers} do \textit{site}, devido a sua responsabilidade, que é a tratativa das requisições.
 
 \begin{image}
-{0.32}
+{0.4}
 {src/imagens/cap4/dsm-classes-forum.png}
 {DSM do projeto desenvolvido}
 {fig:dsm-classes}
 {Produção do autor}
 \end{image}
+
+\par Este foi o ponto ideal para as interceptações, pois quando \textit{controllers} invocam a lógica de negócios na camada de serviço (pacote \textit{br.inpe.forum.service}), esta é interceptada e os metadados definidos são lidos pelo \textit{framework}, que realiza o comportamento definido no metadado, conforme exibido nos testes anteriores.
