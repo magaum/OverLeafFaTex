@@ -1,17 +1,30 @@
 \newpage
-\chapter{Resultados}
+\chapter{Estudo de caso}
 
-\par Neste capitulo serão apresentados os testes implementados com a solução desenvolvida, a fim de validar o funcionamento da integração dos \textit{frameworks}. Foi desenvolvida uma aplicação \textit{web} para utilização dos recursos desenvolvidos, a ideia desta aplicação é ser um fórum para compartilhamento de ideias. Para incentivar a interação entre os usuários as regras da Figura \ref{fig:regras-do-forum} foram definidas, esta página está disponível no endereço https://forum-tg.netlify.com.
+\par Neste capitulo serão apresentados os testes implementados com a solução desenvolvida, a fim de validar o funcionamento a partir de duas perguntas de pesquisa (PP):
+
+\begin{itemize}
+    \item PP1: O acoplamento entre o \textit{framework} e a aplicação é baixo?
+    \item PP2: O \textit{framework} é capaz de realizar o controle de acesso baseado em conquistas?
+\end{itemize}
+
+\section{Metodologia}
+
+\par Para o desenvolvimento e testes do estudo de caso é necessário que a aplicação criada possua controle de acesso em funcionalidades, incremento de pontos e adição de Achievements em determinadas situações. Quando algum erro ocorrer mensagens descritivas deverão ser exibidas. Os testes serão validados a partir de \textit{logs} da aplicação, onde mensagens de sucesso e falha são exibidos. %O acoplamento entre o \textit{framework} e a aplicação desenvolvida serão analisados a partir de uma matriz de dependência estrutural.
+
+\section{Aplicação desenvolvida}
+
+\par Foi desenvolvida uma aplicação \textit{web}\footnote{O estudo de caso está disponível no endereço https://forum-tg.netlify.com} para utilização dos recursos desenvolvidos, com o objetivo de compartilhamento de ideias e conversas sobre assuntos gerais. Para incentivar a interação entre os usuários as regras da Figura \ref{fig:regras-do-forum} foram definidas. A partir destas regras novas funcionalidades são desbloqueadas conforme a utilização da aplicação, e assim, consequentemente, os usuários interagem entre si.
 
 \begin{image}
 {0.23}
 {src/imagens/cap4/regras-do-forum.png}
-{Regras definidas para a aplicação \textit{Web}}
+{Regras definidas para a aplicação \textit{web}}
 {fig:regras-do-forum}
 {Produção do autor}
 \end{image}
 
-\par Esta aplicação possui um \textit{back-end} hospedado no Heroku\footnote{Heroku é um PaaS que significa \textit{Platform as a Service}} no endereço https://forum-back-end.herokuapp.com, os próximos testes abordarão os registros do servidor para confirmar que o Esfinge Guardian realizou as validações esperadas.
+\par Esta aplicação possui o \textit{back-end} hospedado no Heroku\footnote{Heroku é um PaaS que significa \textit{Platform as a Service}. A aplicação está disponível no endereço https://forum-back-end.herokuapp.com}, os próximos testes abordarão os registros da aplicação hospedada no Heroku para confirmar que o Esfinge Guardian realizou as validações esperadas e pode ser utilizado em produção.
 
 \section{Fluxo de funcionamento}
 
@@ -67,7 +80,7 @@
 {Produção do autor}
 \end{image}
 
-\par Com as evidências exibidas acima ainda não é possível fazer a identificação de que validações de segurança não foram executadas. Para realizar isto foi preciso verificar os \textit{logs} do servidor. A Figura \ref{fig:ct1-heroku-logs} exibe estes \textit{logs} separados por cores verdes, isto é, a cada linha com o inicio verde onde a data é exibida, um novo \textit{log} foi registrado. O primeiro \textit{log} são registros do clique no botão "Salvar" (Figura \ref{fig:topico-criado}), onde uma requisição do tipo \textit{POST} é feita para que o tópico seja salvo. O segundo \textit{log} é o redirecionamento para a página inicial (Figura \ref{fig:tela-inicial-apos-criacao-do-topico}), onde uma requisição \textit{GET} é feita para recuperação dos tópicos existentes.
+\par Com as evidências exibidas acima ainda não é possível fazer a identificação de que validações de segurança não foram executadas. Para realizar isto foi preciso verificar os \textit{logs} do servidor. A Figura \ref{fig:ct1-heroku-logs} exibe estes \textit{logs} separados por cores verdes, isto é, a cada linha com o inicio verde onde a data é exibida, um novo \textit{log} foi registrado. O primeiro \textit{log} são registros do clique no botão "Salvar"\ (Figura \ref{fig:topico-criado}), onde uma requisição do tipo \textit{POST} é feita para que o tópico seja salvo. O segundo \textit{log} é o redirecionamento para a página inicial (Figura \ref{fig:tela-inicial-apos-criacao-do-topico}), onde uma requisição \textit{GET} é feita para recuperação dos tópicos existentes.
 
 \begin{image}
 {0.23}
@@ -200,7 +213,9 @@
 
 \section{Matriz de Dependência Estrutural}
 
-\par Matriz de Dependência Estrutural, do inglês \textit{Dependency Structure Matrix} (DSM), tem como objetivo facilitar a visualização entre as dependências do projeto, o acoplamento entre as classes. Neste caso o que será abordado é o desacoplamento envolvendo o Esfinge Gamification, que foi utilizado na classe \textit{GameSetup}, presente no pacote \textit{br.inpe.forum.gamification}. É possível visualizar na Figura \ref{fig:dsm-classes} que esta classe depende apenas de \textit{MongoFactory}, devido a identificação amarela a sua esquerda. Já as classes que dependem de \textit{GameSetup} são os \textit{controllers} do \textit{site}, devido a sua responsabilidade, que é a tratativa das requisições.
+\par Matriz de Dependência Estrutural, do inglês \textit{Dependency Structure Matrix} (DSM), tem como objetivo facilitar a visualização entre as dependências do projeto, o acoplamento entre as classes \cite{browning2001applying}. Neste caso o que será abordado é o acoplamento envolvendo a aplicação e o Esfinge Gamification, que foi utilizado na classe GameSetup, presente no pacote br.inpe.forum.gamification. É possível visualizar na Figura \ref{fig:dsm-classes} que esta classe depende apenas de MongoFactory, devido a identificação amarela a sua esquerda. Já as classes que dependem de GameSetup são os \textit{controllers} do \textit{site}, devido a sua responsabilidade, que é a tratativa das requisições.
+
+\par Este foi o ponto ideal para interceptações, pois quando \textit{controllers} invocam a lógica de negócios na camada de serviço (pacote br.inpe.forum.service), a invocação é interceptada e os metadados definidos nas classes de serviço são lidos pelo \textit{framework}, que realiza o comportamento definido no metadado, conforme exibido nos testes anteriores.
 
 \begin{image}
 {0.4}
@@ -210,4 +225,5 @@
 {Produção do autor}
 \end{image}
 
-\par Este foi o ponto ideal para as interceptações, pois quando \textit{controllers} invocam a lógica de negócios na camada de serviço (pacote \textit{br.inpe.forum.service}), esta é interceptada e os metadados definidos são lidos pelo \textit{framework}, que realiza o comportamento definido no metadado, conforme exibido nos testes anteriores.
+\par Baseado na DSM apresentada é possível responder a PP1 positivamente, pois o \textit{framework} possui baixo acoplamento com a solução desenvolvida, sendo utilizado apenas em uma classe para configuração, por classes com responsabilidades de \textit{controller} para que os métodos pudessem ser interceptados e pelo serviço responsável por recuperar informações de gamificação de usuários, a principal interface entre o \textit{framework} e a aplicação desenvolvida são as anotações que adicionam os metadados necessários. A respeito da PP2 é possível identificar que a integração foi um sucesso e que o controle de acesso é eficaz devido aos testes executados nesta seção. Todas as execuções que precisariam ser validadas pelo Esfinge Guardian foram registradas com sucesso pelo servidor a partir de \textit{logs} que confirmaram esta validação. 
+\par Desta forma é possível dizer que o Esfinge Gamification é desacoplado de domínio, desta forma, pode ser facilmente inserido como uma dependência e utilizado em diversas aplicações sem dificuldades, devido a sua generalização.

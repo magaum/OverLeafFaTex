@@ -5,14 +5,17 @@
 \section{Java}
 
 \par Java é uma linguagem de programação multiplataforma, concorrente (executa mais de uma tarefa em paralelo), baseada em classes e orientada a objetos \cite{joy2000java}.
-\par A linguagem Java é compilada e interpretada. Após escrever um programa em Java, estes são salvos como código fonte com extensão ".java". Quando estes códigos fontes são compilados, um arquivo binário chamado de arquivo de classe com extensão ".class"\ é gerado. Estes arquivos não são executados diretamente pelos processadores, pois eles não contêm instruções para os mesmos. Os programas Java são compilados em um formato de arquivo chamado \textit{bytecode}. Desta forma, esses programas podem ser executados em qualquer sistema operacional que possua um interpretador JVM (Java \textit{Virtual Machine}) em um JRE (Java \textit{Runtime} \textit{Environment}) conforme Figura \ref{fig:ambiente java}. Assim, o código precisa ser compilado apenas uma vez para funcionar em qualquer sistema operacional que possua a configuração citada, pois os \textit{bytecodes} serão executados da mesma forma pela JVM \cite{arnold2005java}.
+
+\par A linguagem Java é compilada e interpretada. Após escrever um programa em Java, estes são salvos como código fonte com extensão ".java". Quando estes códigos fontes são compilados, um arquivo binário chamado de arquivo de classe com extensão ".class"\ é gerado. Estes arquivos não são executados diretamente pelos processadores, pois eles não contêm instruções para os mesmos. Os programas Java são compilados em um formato de arquivo chamado \textit{bytecode}. Desta forma, esses programas podem ser executados em qualquer sistema operacional que possua um interpretador JVM (Java \textit{Virtual Machine}) em um JRE (Java \textit{Runtime} \textit{Environment}) conforme Figura \ref{fig:ambiente java}.
 
 \begin{image}
-{0.2}
+{0.16}
 {src/imagens/cap1/ambiente-java.png}
 {Ambiente Java}{fig:ambiente java}
 {Adaptado de \citeonline{javaprogrammingenvioronment2010}}
 \end{image}
+
+Assim, o código precisa ser compilado apenas uma vez para funcionar em qualquer sistema operacional que possua a configuração citada, pois os \textit{bytecodes} serão executados da mesma forma pela JVM \cite{arnold2005java}.
 
 \par É uma linguagem fortemente tipada, isto é, as características das variáveis tem que ser definidas em tempo de compilação. Ela possui um coletor de lixo (\textit{garbage collector}) para evitar problemas de segurança como \textit{deadlock}. \cite{joy2000java}
 
@@ -29,7 +32,7 @@
 {\cite{parson2000using}} %font
 \end{image}
 
-\par Cada tipo citado anteriormente possui sua implementação para retornar as informações necessárias, a classe \textit{Class} possui as características da classe do objeto atual em memória, e a partir dela é possível realizar as operações de introspecção vide Figura \ref{fig:introspeccao-flow}, isto é, a classe X possui uma instância de \textit{Class} com seus metadados como seu nome, construtores, assinatura dos métodos, nome e modificadores dos atributos, existência de anotações, e assim vai suscetivamente até que a classe \textit{Class} possua uma instância com suas características.
+\par Cada tipo citado anteriormente possui sua implementação para retornar as informações necessárias, a classe Class possui as características da classe do objeto atual em memória, e a partir dela é possível realizar as operações de introspecção vide Figura \ref{fig:introspeccao-flow}, isto é, a classe X possui uma instância de Class com seus metadados como seu nome, construtores, assinatura dos métodos, nome e modificadores dos atributos, existência de anotações, e assim vai suscetivamente até que a classe Class possua uma instância com suas características.
 
 \begin{image}
 {0.4} %scale
@@ -38,16 +41,18 @@
 {fig:introspeccao-flow} %label
 {\citeonline{guerra2014componentes}} %font
 \end{image}
-
 \par Com reflexão é possível recuperar informações padrões sobre os dados (classes, métodos e atributos), porém não é possível realizar processos mais sofisticados como validações ou alguma regra de negócio baseando-se nisto \cite{guerra2010architectural}, para este tipo de necessidade foi criado uma forma de adição de metadados em Java, para facilitar este processo que era realizado via arquivos ou recursos não padrão, esta solução foi a criação das anotações \citeonline{jcp175metadata2002facility}.
 
 \subsubsection{\textit{Proxy} Dinâmico}
 
 \par Para entender o conceito de \textit{proxy} dinâmico (PD), o padrão de projeto \textit{proxy} proposto por \citeonline{gamma1995design}, exibido na Figura \ref{fig:proxy-pattern} precisa ser abordado antes. Este tem como objetivo o encapsulamento de um objeto e a implementação de sua interface, ou seja, um objeto X com uma interface Y é encapsulado por um objeto Z que implementa a interface Y também, possuindo os mesmos métodos.
+
+\par Quando o cliente (Figura \ref{fig:proxy-pattern}) realiza chamadas de métodos do assuntoReal (objeto encapsulado), estas são enviadas primeiramente ao \textit{proxy}, 
+portanto, todas as execuções de métodos do objeto encapsulado são interceptadas pelo \textit{proxy}. Na execução do \textit{proxy} qualquer lógica pode ser aplicada, como validações ou chamadas de outros métodos. Ao final da execução das lógicas definidas no \textit{proxy}, a responsabilidade é devolvida ao objeto encapsulado. Um problema na utilização de \textit{proxies} é a dependência da interface, pois caso outro objeto precise ser encapsulado sua interface também precisa ser implementada, ou seja, outro \textit{proxy} deverá ser criado.
 %Desta forma as execuções dos métodos do objeto encapsulado são interceptadas pelo \textit{proxy}. Em outras palavras, a cada chamada de métodos do objeto encapsulado, o \textit{proxy} é executado antes conforme Figura \ref{fig:proxy-pattern}.
 
 \begin{image}
-{0.2} %scale
+{0.18} %scale
 {src/imagens/cap2/proxy-pattern-criado.png} %relative path
 {Padrão de projeto \textit{proxy}} %caption
 {fig:proxy-pattern} %label
@@ -56,20 +61,17 @@
 
 %, assim processos podem ser realizados de forma transparente aos dois pontos (o cliente que invocou o método e o objeto que foi invocado). 
 
-\par Quando o cliente (Figura \ref{fig:proxy-pattern}) realiza chamadas de métodos do assuntoReal (objeto encapsulado), estas são enviadas primeiramente ao \textit{proxy}, 
-portanto, todas as execuções de métodos do objeto encapsulado são interceptadas pelo \textit{proxy}. Na execução do \textit{proxy} qualquer lógica pode ser aplicada, como validações ou chamadas de outros métodos. Ao final da execução das lógicas definidas no \textit{proxy}, a responsabilidade é devolvida ao objeto encapsulado. Um problema na utilização de \textit{proxies} é a dependência da interface, pois caso outro objeto precise ser encapsulado sua interface também precisa ser implementada, ou seja, outro \textit{proxy} deverá ser criado.
-
-\par PD é um recurso disponibilizado pela API reflexão (\textit{reflection}) do Java, a fim de interceptar invocações de objetos de forma semelhante ao padrão de projeto \textit{proxy} apresentado na Figura \ref{fig:proxy-pattern}, entretanto sua principal diferença é que objetos com qualquer interface podem ser interceptados, devido a forma de criação do PD pela JVM a partir do método estático \textit{newProxyInstance} da classe \textit{Proxy}, que devolve uma instância que será utilizada no lugar do objeto encapsulado com os parâmetros passados para este método, a Figura \ref{fig:proxy-dinamico} exemplifica o funcionamento de um PD. 
+\par PD é um recurso disponibilizado pela API reflexão (\textit{reflection}) do Java, a fim de interceptar invocações de objetos de forma semelhante ao padrão de projeto \textit{proxy} apresentado na Figura \ref{fig:proxy-pattern}, entretanto sua principal diferença é que objetos com qualquer interface podem ser interceptados, devido a forma de criação do PD pela JVM a partir do método estático "newProxyInstance" da classe \textit{Proxy}, que devolve uma instância que será utilizada no lugar do objeto encapsulado com os parâmetros passados para este método, a Figura \ref{fig:proxy-dinamico} exemplifica o funcionamento de um PD.
 
 \begin{image}
-{0.3} %scale
+{0.27} %scale
 {src/imagens/cap2/funcionamento-proxy-dinamico.png} %relative path
 {Funcionamento do \textit{proxy} dinâmico} %caption
 {fig:proxy-dinamico} %label
 {\cite{guerra2014componentes}} %font
 \end{image}
-
-\par O método estático criaProxyDinamico da Figura \ref{fig:cria-proxy-dinamico} recebe um objeto como parâmetro (linha 8), e ele é encapsulado de acordo com a ideia do padrão de projeto \textit{proxy} na linha 12, a partir da criação de uma nova instância da classe atual (ProxyDinamicoExemplo). Com essa nova instância, o método construtor privado localizado na linha 4 é invocado, e nele, a referência do objeto recebido na linha 8 é encapsulada. O retorno do método criaProxyDinamico é o objeto encapsulado pelo PD, a partir dos parâmetros passados para o método estático \textit{newProxyInstance}. Este recebe três parâmetros: 1) \textit{ClassLoader} do objeto; 2) Interfaces do objeto; 3) Uma instância da implementação de \textit{InvocationHandler}; O PD é criado com esses parâmetros pela JVM conforme já dito, e todas invocações do objeto são interceptadas pelo terceiro parâmetro passado na instância do \textit{proxy}, que é uma implementação de \textit{InvocationHandler}, neste exemplo a própria classe ProxyDinamicoExemplo.
+\par O método estático criaProxyDinamico da Figura \ref{fig:cria-proxy-dinamico} recebe um objeto como parâmetro (linha 8), e ele é encapsulado de acordo com a ideia do padrão de projeto \textit{proxy} na linha 12, a partir da criação de uma nova instância da classe atual (ProxyDinamicoExemplo). Com essa nova instância, o método construtor privado localizado na linha 4 é invocado, e nele, a referência do objeto recebido na linha 8 é encapsulada.
+\par O retorno do método criaProxyDinamico é o objeto encapsulado pelo PD, a partir dos parâmetros passados para o método estático newProxyInstance. Este recebe três parâmetros: 1) ClassLoader do objeto; 2) Interfaces do objeto; 3) Uma instância da implementação de InvocationHandler; O PD é criado com esses parâmetros pela JVM conforme já dito, e todas invocações do objeto são interceptadas pelo terceiro parâmetro passado na instância do \textit{proxy}, que é uma implementação de InvocationHandler, neste exemplo a própria classe ProxyDinamicoExemplo.
 
 \begin{figure}[H]
     \centering
@@ -97,11 +99,13 @@ public class ProxyDinamicoExemplo implements InvocationHandler {
 \end{figure}
 
 
-\par A interface \textit{InvocationHandler} do pacote \textit{java.lang.reflect} define um método apenas, o \textit{Invoke}, vide Figura \ref{fig:invoke-implementacao}, este método é executado antes de qualquer invocação do objeto encapsulado no processo anterior de criação do \textit{proxy}.
+\par A interface InvocationHandler do pacote java.lang.reflect define um método apenas, o Invoke, vide Figura \ref{fig:invoke-implementacao}, este método é executado antes de qualquer invocação do objeto encapsulado no processo anterior de criação do \textit{proxy}.
+
+\par A cada invocação do objeto encapsulado, o método invoke é executado antes, de acordo com a Figura \ref{fig:invoke-registrando-log} onde é possível verificar a criação do PD na linha 4, onde o método criaProxyDinamico da Figura \ref{fig:cria-proxy-dinamico} é chamado, retornando um \textit{proxy} do tipo Executor, este possui o método executionTime que retorna uma instância de java.util.Date.
 
 \begin{figure}[H]
     \centering
-    \caption{Implementação da interface \textit{InvocationHanlder}}
+    \caption{Implementação da interface InvocationHanlder}
 \begin{java}
 public class ProxyDinamicoExemplo implements InvocationHandler {
 //encapsulamento do objeto e metodo de criacao do proxy omitidos
@@ -124,8 +128,6 @@ public class ProxyDinamicoExemplo implements InvocationHandler {
     \fonte{Produção do autor}
 \end{figure}
 
-\par A cada invocação do objeto encapsulado, o método \textit{invoke} é executado antes, de acordo com a Figura \ref{fig:invoke-registrando-log} onde é possível verificar a criação do PD na linha 4, onde o método criaProxyDinamico da Figura \ref{fig:cria-proxy-dinamico} é chamado, retornando um \textit{proxy} do tipo \textit{Executor}, este possui o método \textit{executionTime} que retorna uma instância de \textit{java.util.Date}.
-
 \begin{figure}[H]
     \centering
     \caption{Registros da invocação interceptada}
@@ -143,11 +145,11 @@ public class App {
     \fonte{Produção do autor}
 \end{figure}
 
-Quando o PD é invocado, logs são criados conforme linha 6 da Figura \ref{fig:invoke-implementacao}, esta linha exibe o método interceptado e nome do \textit{proxy}. Sempre que o objeto \textit{executor} (objeto encapsulado) for invocado, um log será gerado.
+Quando o PD é invocado, logs são criados conforme linha 6 da Figura \ref{fig:invoke-implementacao}, esta linha exibe o método interceptado e nome do \textit{proxy}. Sempre que o objeto executor (objeto encapsulado) for invocado, um log será gerado.
 
 \subsection{Anotação}
 
-\par Anotações em Java, são utilizadas para definição de metadados, isto é, informações sobre algo, estas podem ser inseridas em: Pacotes; Classes; Interfaces; Métodos; Atributos; Parâmetros; Construtores; e em Anotações \cite{jcp2005annotation269}. O local onde uma anotação pode ser inserida é definido pela anotação \textit{@Target} que recebe de um a N parâmetros do Enum tipo \textit{java.lang.annotation.ElementType}\footnote{É interessante restringir o local onde as anotações podem ser inseridas para evitar uma má interpretação durante sua recuperação via reflexão}, a Tabela \ref{tab:targets} exibe os parâmetros disponíveis e seu escopo. Quando uma anotação é inserida fora de seu escopo um erro de compilação é exibido alertando que sua utilização está incorreta \citeonline{joy2000java}.
+\par Anotações em Java, são utilizadas para definição de metadados, isto é, informações sobre algo, estas podem ser inseridas em: Pacotes; Classes; Interfaces; Métodos; Atributos; Parâmetros; Construtores; e em Anotações \cite{jcp2005annotation269}. O local onde uma anotação pode ser inserida é definido pela anotação @Target que recebe de um a N parâmetros do Enum tipo java.lang.annotation.ElementType\footnote{É interessante restringir o local onde as anotações podem ser inseridas para evitar uma má interpretação durante sua recuperação via reflexão}, a Tabela \ref{tab:targets} exibe os parâmetros disponíveis e seu escopo. Quando uma anotação é inserida fora de seu escopo um erro de compilação é exibido alertando que sua utilização está incorreta \citeonline{joy2000java}.
 %Quando uma anotação é inserida fora de seu escopo um erro de compilação com a mensagem \textit{"The annotation @NomeDaAnotação is disallowed for this location"} \citeonline{joy2000java}.
 
 \begin{table}[H]
@@ -167,10 +169,10 @@ Quando o PD é invocado, logs são criados conforme linha 6 da Figura \ref{fig:i
         TYPE\_USE & Variáveis com tipos genéricos \\ \hline
 \end{tabular}
     \label{tab:targets}
-    \fonte{Adaptado de Java specification}
+    \fonte{Adaptado de \citeonline{joy2000java}}
 \end{table}
 
-Definido o escopo de atuação da anotação é preciso definir seu escopo de duração, isto é, até onde ela será mantida no código, pois as anotações não são persistidas até o tempo de execução sem uma anotação chamada \textit{@Retention}. Esta define o ciclo de vida da anotação, na Tabela \ref{tab:retentions} seus parâmetros, que são de um a N Enum do tipo \textit{java.lang.annotation.RetentionPolicy} são explicados \citeonline{joy2000java}.
+Definido o escopo de atuação da anotação é preciso definir seu escopo de duração, isto é, até onde ela será mantida no código, pois as anotações não são persistidas até o tempo de execução sem uma anotação chamada @Retention. Esta define o ciclo de vida da anotação, na Tabela \ref{tab:retentions} seus parâmetros, que são de um a N Enum do tipo java.lang.annotation.RetentionPolicy são explicados \citeonline{joy2000java}.
 
 \begin{table}[H]
     \centering
@@ -187,7 +189,7 @@ Definido o escopo de atuação da anotação é preciso definir seu escopo de du
     \fonte{Adaptado de Java specification}
 \end{table}
 
-\par O parâmetro \textit{SOURCE} é utilizado geralmente por IDE's (\textit{Integrated Development Environment}), para adicionar algum comportamento específico como a anotação \textit{@SuppressWarnings} que serve para ignorar algum aviso, presente em IDE's como o Eclipse e o IntelliJ IDEA. Para que uma anotação seja recuperada em tempo de execução é preciso adicionar a \textit{RetentionPolicy Runtime}, devido ao comportamento padrão da anotação \textit{@Retention} que é o valor \textit{CLASS} \cite{joy2000java}.
+\par O parâmetro SOURCE é utilizado geralmente por IDE's (\textit{Integrated Development Environment}), para adicionar algum comportamento específico como a anotação @SuppressWarnings que serve para ignorar algum aviso, presente em IDE's como o Eclipse e o IntelliJ IDEA. Para que uma anotação seja recuperada em tempo de execução é preciso adicionar a RetentionPolicy Runtime, devido ao comportamento padrão da anotação @Retention que é o valor CLASS \cite{joy2000java}.
 
 \par É possível adicionar propriedades em uma anotação para complementar comportamentos ou informações que esta proporcionará, as propriedades permitidas são: Tipos primitivos; Enums; Class (Apenas a classe Class); String; Anotações; e Arrays dos tipos anteriores conforme Figura \ref{fig:propriedades-anotacoes}.
 
@@ -237,7 +239,7 @@ public @interface Anotacao {
     \fonte{Produção do autor}
 \end{figure}
 
-\textit{Frameworks} baseados em reflexão e metadados são \textit{softwares} que utilizam a reflexão para obtenção de metadados, estes disponibilizam anotações com o valor \textit{Runtime} para que sejam lidos posteriormente \cite{guerra2009pattern}.
+\textit{Frameworks} baseados em reflexão e metadados são \textit{softwares} que utilizam a reflexão para obtenção de metadados, estes disponibilizam anotações com o valor Runtime para que sejam lidos posteriormente \cite{guerra2009pattern}.
 
 \section{\textit{Framework}}
 
@@ -245,7 +247,7 @@ public @interface Anotacao {
 Baseado nisso \textit{frameworks} permitem que aplicações com estruturas semelhantes sejam criadas, facilitando a manutenção, padronização e legibilidade do código, entretanto, isto restringe o desenvolvedor a solução que o \textit{framework} aplica, não permitindo que determinados caminhos sejam seguidos ou certas decisões sejam tomadas no projeto \cite{gamma2009padroes}. A ideia por trás dessa restrição citada é a inversão de controle existente, onde os \textit{frameworks} chamam o código que foi desenvolvido, não o contrário, desta forma muitas vezes é realizada a injeção de dependências neste código criado, que é o fornecimento de implementações de interfaces em tempo de execução, a Figura \ref{fig:inversao-controle} exemplifica uma situação em que existe a inversão de controle em um ambiente Web, onde a requisição é recebida pelo servidor e a responsabilidade inicial é do \textit{framework}, este realiza o processamento inicial passando a requisição por filtros e outras validações e depois passa a responsabilidade para as classes criadas pelo desenvolvedor final.
 
 \begin{image}
-{0.18} %scale
+{0.157} %scale
 {src/imagens/cap2/arquitetura-spring-traduzida.png} %relative path
 {Inversão de controle} %caption
 {fig:inversao-controle} %label
@@ -335,7 +337,7 @@ O uso de anotações é chamado de programação orientada a atributos \cite{bus
 
 \par Esfinge Project\footnote{O projeto está disponível no endereço: http://esfinge.sf.net.} é um projeto \textit{open-source} iniciado em 2011 por Dr. Eduardo Guerra junto a GSW, que tem como objetivo a criação de soluções reutilizáveis para um desenvolvimento ágil, um produto final flexível e de fácil manutenção.
 \par O projeto disponibiliza 9 \textit{frameworks} até o momento, estes são: QueryBuilder, Comparison, Guardian, AOM Role Mapper, SystemGlue, Gamification, Metadata, Classmock, ReTest.
-\par Todos os frameworks citados acima seguem uma filosofia que consiste em: Configuração de metadados para que o comportamento desejado ocorra; Componentes que podem ser integrados a aplicações de forma simples; Pontos de extensão para criação de novas funcionalidades; Remover a preocupação com a solução que o \textit{framework} disponibiliza, permitindo que o desenvolvedor foque apenas em sua aplicação específica \citeonline{esfingeproject2011}.
+\par Todos os frameworks citados acima seguem uma filosofia que consiste em: Configuração de metadados para que o comportamento desejado ocorra; Componentes que podem ser integrados a aplicações de forma simples; Pontos de extensão para criação de novas funcionalidades; Remover a preocupação com a solução que o \textit{framework} disponibiliza, permitindo que o desenvolvedor foque apenas em sua aplicação específica \cite{esfingeproject2011}.
 
 \subsection{Esfinge Gamification}
 
@@ -348,7 +350,7 @@ O uso de anotações é chamado de programação orientada a atributos \cite{bus
 %    \label{fig:esfinge-ga%mification-plugado}
 %\end{figure}
 
-\par O comportamento do \textit{framework} é especificado via metadados conforme a filosofia dos projetos Esfinge citada anteriormente, estes são anotações que podem ser adicionada em programas Java, a Tabela \ref{tab:anotacoes-gamification} detalha as opções disponíveis. Existem quatro tipos de processos implementados pelo \textit{framework}, estes são: Ponto, Ranking, \textit{Reward}, Troféu vide Figura \ref{fig:arquitetura-esfinge-gamification}.
+\par O comportamento do \textit{framework} é especificado via metadados conforme a filosofia dos projetos Esfinge citada anteriormente, estes são anotações que podem ser adicionadas em programas Java, a Tabela \ref{tab:anotacoes-gamification} detalha as opções disponíveis. Existem quatro tipos de processos implementados pelo \textit{framework}, estes são: Ponto, Ranking, \textit{Reward}, Troféu vide Figura \ref{fig:arquitetura-esfinge-gamification}.
 
 \begin{table}[H]
 \caption{Anotações disponibilizadas pelo Esfinge Gamification}
@@ -375,6 +377,8 @@ Anotação & Comportamento \\ \hline
 {\citeonline{esfingegamification2011}} %font
 \end{image}
 
+\par Caso as implementações existentes não atendam complemente as funcionalidades necessárias em alguma situação, é possível implementar a interface Achievement e criar metadados para a nova implementação.
+
 \subsubsection{Características das conquistas disponibilizadas}
 
 \par Ponto: Tem como intenção atribuir determinada quantidade de pontos e seu tipo, por exemplo, uma conquista que atribui 10 pontos de moedas de ouro, onde moedas de ouro são o tipo e 10 os pontos atribuídos. 
@@ -386,12 +390,12 @@ Anotação & Comportamento \\ \hline
 
 \subsubsection{Pontos de extensão}
 
-O \textit{framework} possui dois pontos de extensão (\textit{hotspots}), onde novos comportamentos podem ser adicionados quando necessário. Desta forma é possível aplicar outras lógicas de gamificação, implementando a interface \textit{Achievement} (Figura \ref{fig:arquitetura-esfinge-gamification}) disponível no pacote \textit{net.sf.esfinge.gamification.achievement}, caso os comportamentos disponibilizados pelo \textit{framework} não sejam adequados \`a determinada situação. 
-\par A interface \textit{Achievement} exibida na Figura \ref{fig:interface-achievement} possuí três métodos, eles servem para realizar os respectivos processos em \textit{Achievements}: Recuperação de nome; Incrementar informações (adição de pontos por exemplo); e remoção.
+O \textit{framework} possui dois pontos de extensão (\textit{hotspots}), onde novos comportamentos podem ser adicionados quando necessário. Desta forma é possível aplicar outras lógicas de gamificação, implementando a interface \textit{Achievement} (Figura \ref{fig:arquitetura-esfinge-gamification}) disponível no pacote net.sf.esfinge.gamification.achievement, caso os comportamentos disponibilizados pelo \textit{framework} não sejam adequados \`a determinada situação. 
+\par A interface \textit{Achievement} exibida na Figura \ref{fig:interface-achievement} possuí três métodos, eles servem para realizar os respectivos processos em Achievements: Recuperação de nome; Incrementar informações (adição de pontos por exemplo); e remoção.
 
 \begin{figure}[H]
     \centering
-    \caption{Interface \textit{Achievement}}
+    \caption{Interface Achievement}
     \begin{java}
 public interface Achievement {
     
@@ -406,11 +410,11 @@ public interface Achievement {
     \fonte{Produção do autor}
 \end{figure}
 
-\par Implementando esta interface novas ações podem ser adicionados via anotações, elas possuirão a anotação @GamificationProcessor exibida na Figura \ref{fig:gamification-processor}, que recebe uma classe que implemente a interface \textit{AchievementProcessor} como parâmetro.
+\par Implementando esta interface novas ações podem ser adicionados via anotações, elas possuirão a anotação @GamificationProcessor exibida na Figura \ref{fig:gamification-processor}, que recebe uma classe que implemente a interface AchievementProcessor como parâmetro.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \caption{Anotação \textit{@GamificationProcessor}}
+    \caption{Anotação @GamificationProcessor}
     \begin{java}
 // anotacoes retention e target omitidas
 public @interface GamificationProcessor {
@@ -421,13 +425,13 @@ public @interface GamificationProcessor {
     \label{fig:gamification-processor}
 \end{figure}
 
-\par A Figura \ref{fig:points-to-user} exemplifica a anotação @PointsToUser, que possui a classe \textit{PointsToUserProcessor} (Figura \ref{fig:achievement-processor-implementado}) como implementação de \textit{AchievementProcessor}. Cada anotação criada possuirá uma implementação de \textit{AchievementProcessor} que executa o comportamento específico da anotação, isto é, a anotação adiciona a informação e o \textit{AchievementProcessor} seu comportamento.
+\par A Figura \ref{fig:points-to-user} exemplifica a anotação @PointsToUser, que possui a classe PointsToUserProcessor (Figura \ref{fig:achievement-processor-implementado}) como implementação de AchievementProcessor. Cada anotação criada possuirá uma implementação de AchievementProcessor que executa o comportamento específico da anotação, isto é, a anotação adiciona a informação e o AchievementProcessor seu comportamento.
 
 %A Figura \ref{fig:bpmn-buscando-metadados} exibe como é realizada a busca desses metadados... a estrutura das anotações, utilizando como exemplo a anotação @PointsToUser, e a Figura \ref{fig:achievement-processor-implementado} exibe como é o comportamento deste metadado.
 
 \begin{figure}[H]
     \centering
-    \caption{Anotação \textit{@PointsToUser}}
+    \caption{Anotação @PointsToUser}
     \begin{java}
 // anotacoes target e retention omitidas
 @GamificationProcessor(PointsToUserProcessor.class)
@@ -442,7 +446,7 @@ public @interface PointsToUser {
 
 \begin{figure}[H]
     \centering
-    \caption{Implementação de \textit{AchievementProcessor} que define comportamento da anotação \textit{@PointsToUser}}
+    \caption{Implementação de AchievementProcessor que define comportamento da anotação @PointsToUser}
 \begin{java}
 public class PointsToUserProcessor implements AchievementProcessor {
 	
@@ -468,11 +472,11 @@ public class PointsToUserProcessor implements AchievementProcessor {
     \fonte{Adaptado de \citeonline{esfingegamification2011}}
 \end{figure}
 
-\par A interface \textit{AchievementProcessor} exibida na Figura \ref{fig:achievement-processor} possui dois métodos a serem implementados, estes são: \textit{receiveAnnotation} e \textit{process}. Eles tem o objetivo de recuperar informações da anotação recebida e executar seu comportamento, respectivamente. A Figura \ref{fig:achievement-processor-implementado} exibe um exemplo onde as informações \textit{quantity} e \textit{name} são recuperadas da anotação \textit{@PointsToUser} entre as linhas 8 e 10. O comportamento desta implementação é a atribuição de pontos, portanto o método \textit{addAchievement} é invocado para que isso seja persistido de acordo com a especialização da classe \textit{Game}.
+\par A interface AchievementProcessor exibida na Figura \ref{fig:achievement-processor} possui dois métodos a serem implementados, estes são: receiveAnnotation e process. Eles tem o objetivo de recuperar informações da anotação recebida e executar seu comportamento, respectivamente. A Figura \ref{fig:achievement-processor-implementado} exibe um exemplo onde as informações quantity e name são recuperadas da anotação @PointsToUser entre as linhas 8 e 10. O comportamento desta implementação é a atribuição de pontos, portanto o método addAchievement é invocado para que isso seja persistido de acordo com a especialização da classe \textit{Game}.
 
 \begin{figure}[H]
     \centering
-    \caption{Interface \textit{AchievementProcessor}}
+    \caption{Interface AchievementProcessor}
     \begin{java}
 public interface AchievementProcessor {
 	
@@ -485,19 +489,12 @@ public interface AchievementProcessor {
     \label{fig:achievement-processor}
 \end{figure}
 
-Também é possível adicionar novos comportamentos de persistência estendendo a classe abstrata \textit{Game}, disponível no pacote \textit{net.sf.esfinge.gamification.mechanics}. Atualmente existem três implementações, estas são: Persistência em arquivo de propriedades; Banco de dados relacional; e em memória \cite{esfingegamification2011}.
+Também é possível adicionar novos comportamentos de persistência estendendo a classe abstrata \textit{Game}, disponível no pacote net.sf.esfinge.gamification.mechanics. Atualmente existem três implementações, estas são: Persistência em arquivo de propriedades; Banco de dados relacional; e em memória \cite{esfingegamification2011}.
 
 \subsubsection{Funcionamento do Esfinge Gamification}
 
-\par A Figura \ref{fig:gamification-diagrama-classe-cap2} apresenta o diagrama de classe do projeto, já o diagrama apresentado na Figura \ref{fig:diagrama-funcionamento-gamification} exibe o fluxo de funcionamento do Esfinge Gamification. A classe \textit{UserStorage} possui dois métodos, \textit{setUserID} e \textit{getUserID}, responsáveis por definir o usuário que será utilizado nos processos de gamificação e recuperar este usuário, respectivamente.
-
-\begin{image}
-{0.33} %scale
-{src/imagens/cap2/gamification-class-diagram-cap2.png} %relative path
-{Diagrama de classes do projeto Esfinge Gamification} %caption
-{fig:gamification-diagrama-classe-cap2} %label
-{Produção do autor} %font
-\end{image}
+\par A Figura \ref{fig:gamification-diagrama-classe-cap2} apresenta o diagrama de classe do projeto, já o diagrama apresentado na Figura \ref{fig:diagrama-funcionamento-gamification} exibe o fluxo de funcionamento do Esfinge Gamification. A classe 
+UserStorage possui dois métodos, setUserID e getUserID, responsáveis por definir o usuário que será utilizado nos processos de gamificação e recuperar este usuário, respectivamente.
 
 \begin{image}
 {0.5} %scale
@@ -507,7 +504,15 @@ Também é possível adicionar novos comportamentos de persistência estendendo 
 {Produção do autor} %font
 \end{image}
 
-\par O método estático \textit{createProxy} da classe \textit{GameProxy} é responsável pela criação de um PD que inicia a execução do Esfinge Gamification. É possível analisar na Figura \ref{fig:gamification-proxy} que a estrutura utilizada pelo \textit{framework} é semelhante a Figura \ref{fig:cria-proxy-dinamico}. O diferencial são as validações realizadas entre as linhas 18 e 23, pois, se durante a criação alguma inconsistência nos metadados for encontrada, como as anotações @PointsToUser e  @RemovePoints no mesmo local\footnote{@PointsToUser atribui pontos e @RemovePoints remove pontos vide Tabela \ref{tab:anotacoes-gamification}}, a exceção \textit{GamificationConfigurationException} do pacote \textit{net.sf.esfinge.gamification.exception} é lançada. 
+\begin{image}
+{0.33} %scale
+{src/imagens/cap2/gamification-class-diagram-cap2.png} %relative path
+{Diagrama de classes do projeto Esfinge Gamification} %caption
+{fig:gamification-diagrama-classe-cap2} %label
+{Produção do autor} %font
+\end{image}
+
+\par O método estático createProxy() da classe GameProxy é responsável pela criação de um PD que inicia a execução do Esfinge Gamification. É possível analisar na Figura \ref{fig:gamification-proxy} que a estrutura utilizada pelo \textit{framework} é semelhante a Figura \ref{fig:cria-proxy-dinamico}. O diferencial são as validações realizadas entre as linhas 18 e 23, pois, se durante a criação alguma inconsistência nos metadados for encontrada, como as anotações @PointsToUser e  @RemovePoints no mesmo local\footnote{@PointsToUser atribui pontos e @RemovePoints remove pontos vide Tabela \ref{tab:anotacoes-gamification}}, a exceção GamificationConfigurationException do pacote net.sf.esfinge.gamification.exception é lançada. 
 
 \begin{figure}[H]
     \centering
@@ -549,8 +554,8 @@ public class GameProxy implements InvocationHandler {
     \fonte{Produção do autor}
 \end{figure}
 
-A Figura \ref{fig:bpmn-recuperacao-achievement-processor} detalha os processos macro da Figura \ref{fig:diagrama-funcionamento-gamification}. Quando o \textit{proxy} intercepta execuções, este procura por metadados na classe e no método que foi interceptado, como é possível identificar no segundo passo do processo \textit{getAnnotations}. %Em outras palavras este método procura as anotações citadas na Tabela \ref{tab:anotacoes-gamification} e retorna uma lista com implementações da interface \textit{AchievementProcessor}.
-Cada anotação encontrada é passada para o processo \textit{createAchievementProcessor} que procura pelos metadados citados na Tabela \ref{tab:anotacoes-gamification} retornando um \textit{Optional} com a implementação de \textit{AchievementProcessor} caso o metadado possua a anotação \textit{@GamificationProcessor} ou vazio caso não possua, para que este seja adicionado a uma lista de \textit{AchievementProcessors} criada para que os métodos \textit{process} sejam executados, aplicando o comportamento específico das anotações.
+A Figura \ref{fig:bpmn-recuperacao-achievement-processor} detalha os processos macro da Figura \ref{fig:diagrama-funcionamento-gamification}. Quando o \textit{proxy} intercepta execuções, este procura por metadados na classe e no método que foi interceptado, como é possível identificar no segundo passo do processo getAnnotations. %Em outras palavras este método procura as anotações citadas na Tabela \ref{tab:anotacoes-gamification} e retorna uma lista com implementações da interface \textit{AchievementProcessor}.
+Cada anotação encontrada é passada para o processo createAchievementProcessor que procura pelos metadados citados na Tabela \ref{tab:anotacoes-gamification} retornando um Optional com a implementação de AchievementProcessor caso o metadado possua a anotação @GamificationProcessor ou vazio caso não possua, para que este seja adicionado a uma lista de AchievementProcessors criada para que os métodos process sejam executados, aplicando o comportamento específico das anotações.
 
 \begin{image}
 {0.45} %scale
@@ -652,16 +657,16 @@ Cada anotação encontrada é passada para o processo \textit{createAchievementP
 \par O \textit{framework} é dividido por módulos, estes possuem a arquitetura exibida na Figura \ref{fig:arquitetura-guardian}. Abaixo seus módulos serão explicados:
 
 \begin{itemize}
-    \item \textit{Guardian}: Este é o Super POM \citeonline{apachesoftwarefoundation2019} do projeto, tem como objetivo controlar as dependências compartilhadas e o processo de empacotamento dos demais;
+    \item Guardian: Este é o Super POM \citeonline{apachesoftwarefoundation2019} do projeto, tem como objetivo controlar as dependências compartilhadas e o processo de empacotamento dos demais;
     
-    \item \textit{Guardian-core}: Tem as funcionalidades essenciais para um modelo de autorização, este modulo é utilizado por todos os modelos de controle de acesso presentes no Esfinge \textit{Guardian};
+    \item Guardian-core: Tem as funcionalidades essenciais para um modelo de autorização, este modulo é utilizado por todos os modelos de controle de acesso presentes no Esfinge Guardian;
     
-    \item \textit{RBAC}, \textit{ABAC} e \textit{MAC}: Implementam os modelo de controle de acesso com seus nomes.
+    \item RBAC, ABAC e MAC: Implementam os modelo de controle de acesso com seus nomes.
  
 \end{itemize}
 
 \begin{image}
-{0.2} %scale
+{0.15} %scale
 {src/imagens/cap2/arquitetura-modulos-guardian.png} %relative path
 {Arquitetura dos módulos existêntes no Esfinge Guardian} %caption
 {fig:arquitetura-guardian} %label
@@ -670,13 +675,13 @@ Cada anotação encontrada é passada para o processo \textit{createAchievementP
 
 \subsubsection{Pontos de extensão}
 
-\par Nesta seção os \textit{hotspots} do Esfinge Guardian serão abordados, para estender o \textit{framework} é necessário implementar as interfaces \textit{Populator} e \textit{Authorizer}, além da criação de anotações de segurança.
+\par Nesta seção os \textit{hotspots} do Esfinge Guardian serão abordados, para estender o \textit{framework} é necessário implementar as interfaces Populator e Authorizer, além da criação de anotações de segurança.
 
-\par A interface \textit{Populator} exibida na Figura \ref{fig:interface-populator} possui o método \textit{populate}, que é dedicado a recuperação de informações de segurança necessárias para a autorização. 
+\par A interface Populator exibida na Figura \ref{fig:interface-populator} possui o método populate, que é dedicado a recuperação de informações de segurança necessárias para a autorização. 
 
 \begin{figure}[H]
     \centering
-    \caption{Interface \textit{Populator}}
+    \caption{Interface Populator}
     \begin{java}
 public interface Populator {
 	void populate(AuthorizationContext context);
@@ -686,11 +691,11 @@ public interface Populator {
     \fonte{Adaptado de \citeonline{esfingeguardian}}
 \end{figure}
 
-\par Além de implementar a interface \textit{Populator} é preciso configurá-la. Atualmente existem duas formas de realizar esta configuração, com a anotação @PopulatorClass ou com o arquivo de configuração chamado \textit{"org.esfinge.guardian.populator.Populator"}. A anotação @PopulatorClass exibida na Figura \ref{fig:populator-class} possui uma propriedade onde o \textit{Populator} implementado é definido para ser recuperado pelo \textit{framework} (linha 3).
+\par Além de implementar a interface Populator é preciso configurá-la. Atualmente existem duas formas de realizar esta configuração, com a anotação @PopulatorClass ou com o arquivo de configuração chamado "org.esfinge.guardian.populator.Populator". A anotação @PopulatorClass exibida na Figura \ref{fig:populator-class} possui uma propriedade onde o Populator implementado é definido para ser recuperado pelo \textit{framework} (linha 3).
 
 \begin{figure}[H]
     \centering
-    \caption{Anotação \textit{PopulatorClass}}
+    \caption{Anotação PopulatorClass}
     \begin{java}
 //anotacoes retention e target omitidas
 public @interface PopulatorClass {
@@ -701,21 +706,21 @@ public @interface PopulatorClass {
     \fonte{Adaptado de \citeonline{esfingeguardian}}
 \end{figure}
 
-\par O arquivo de configuração \textit{org.esfinge.guardian.populator.Populator} precisa estar localizado no caminho \textit{resources/META-INF/services/} para ser identificado pelo \textit{framework}. O conteúdo deste arquivo é a classe e o pacote que implementam a interface \textit{Populator}, portanto, se a classe \textit{PopulatorImpl} localizada no pacote \textit{br.org.fatec} for configurada desta forma, o conteúdo do arquivo será \textit{br.org.fatec.PopulatorImpl} e a estrutura de diretórios ficará com o diretório \textit{resources} localizado no mesmo nível dos pacotes, conforme a Figura \ref{fig:populator-tree} exemplifica.
+\par O arquivo de configuração org.esfinge.guardian.populator.Populator precisa estar localizado no caminho resources/META-INF/services/ para ser identificado pelo \textit{framework}. O conteúdo deste arquivo é a classe e o pacote que implementam a interface Populator, portanto, se a classe PopulatorImpl localizada no pacote br.org.fatec for configurada desta forma, o conteúdo do arquivo será br.org.fatec.PopulatorImpl e a estrutura de diretórios ficará com o diretório resources localizado no mesmo nível dos pacotes, conforme a Figura \ref{fig:populator-tree} exemplifica.
 
 \begin{image}
 {0.3} %scale
 {src/imagens/cap2/populator-tree.png} %relative path
-{Estrutura de diretórios para identificação da implementação da interface \textit{Populator}} %caption
+{Estrutura de diretórios para identificação da implementação da interface Populator} %caption
 {fig:populator-tree} %label
 {Produção do autor} %font
 \end{image}
 
-\par A interface \textit{Authorizer} (Figura \ref{fig:interface-authorizer}) possui o método \textit{authorize}, seu retorno é um booleano, que consiste na liberação da autorização ou não. Esta também possui a declaração de um atributo genérico \textit{E extends Annotation}, neste atributo é esperado a anotação de segurança que será avaliada pela implementação. 
+\par A interface Authorizer (Figura \ref{fig:interface-authorizer}) possui o método authorize, seu retorno é um booleano, que consiste na liberação da autorização ou não. Esta também possui a declaração de um atributo genérico E extends Annotation, neste atributo é esperado a anotação de segurança que será avaliada pela implementação. 
 
 \begin{figure}[H]
     \centering
-    \caption{Interface \textit{Authorizer}}
+    \caption{Interface Authorizer}
     \begin{java}
 public interface Authorizer<E extends Annotation> {
 	Boolean authorize(AuthorizationContext context, E securityAnnotation);
@@ -725,11 +730,11 @@ public interface Authorizer<E extends Annotation> {
     \fonte{Adaptado de \citeonline{esfingeguardian}}
 \end{figure}
 
-\par As anotações de segurança precisam conter a anotação @AuthorizerClass (Figura \ref{fig:anotacao-authorizer-class}), que recebe uma classe que estenda \textit{Authorizer} como parâmetro.
+\par As anotações de segurança precisam conter a anotação @AuthorizerClass (Figura \ref{fig:anotacao-authorizer-class}), que recebe uma classe que estenda Authorizer como parâmetro.
 
 \begin{figure}[H]
     \centering
-    \caption{Anotação \textit{AuthorizerClass}}
+    \caption{Anotação @AuthorizerClass}
     \begin{java}
 //anotacoes retention e target omitidas
 public @interface AuthorizerClass {
@@ -745,7 +750,7 @@ public @interface AuthorizerClass {
 
 \begin{figure}[H]
     \centering
-    \caption{Exemplo de implementação da anotação \textit{AuthorizerClass}}
+    \caption{Exemplo de implementação da anotação AuthorizerClass}
     \begin{java}
 @Target({ ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
@@ -759,7 +764,7 @@ public @interface AnotacaoSeguranca {
 \subsubsection{Funcionamento do Esfinge Guardian}
 %\par O \textit{proxy} dinâmico do Esfinge Guardian é criado a partir do método estático \textit{guardObject} da classe \textit{AuthorizationContext} que centraliza o contexto de autorização utilizado pelo \textit{framework}
 
-\par O funcionamento do \textit{framework} pode ser visualizado no diagrama exibido na Figura \ref{fig:diagrama-funcionamento-guardian}, que tem como objetivo esclarecer o fluxo do diagrama de classes da Figura \ref{fig:guardian-diagrama-classe-cap2}. O diagrama de sequencia (Figura \ref{fig:diagrama-funcionamento-guardian}) tem como inicio a interceptação de métodos. Quando o \textit{framework} é executado, um contexto de autorização nomeado \textit{AuthorizationContext} é criado, este contexto contém informações sobre o objeto interceptado vide Figura \ref{fig:guardian-diagrama-classe-cap2}, além de informações que são utilizadas posteriormente para que a autorização ocorra. Após a criação do contexto de autorização, ele é invocado e o processamento da autorização é inciado (execução de \textit{AuthorizationProcessor}). Para que este processamento aconteça, primeiro é preciso encontrar as implementações da interface \textit{Populator}, pois elas possuem as informações necessárias para realização da autorização conforme já dito. Com as implementações encontradas, as autorizações podem ser verificadas a partir da chamada dos \textit{Authorizers} recuperados dos metadados definidos no método interceptado. Estes realizam as verificações necessárias, e caso alguma seja falsa ou falhe, a exceção \textit{AuthorizationException} do pacote \textit{org.esfinge.guardian.exception} é lançada, retornando a mensagem de erro \textit{"Unauthorized Access"}, ou caso nenhuma inconsistência ou erro sejam encontrados, é permitido que o método acesse o recurso desejado inicialmente.
+\par O funcionamento do \textit{framework} pode ser visualizado no diagrama exibido na Figura \ref{fig:diagrama-funcionamento-guardian}, que tem como objetivo esclarecer o fluxo do diagrama de classes da Figura \ref{fig:guardian-diagrama-classe-cap2}. O diagrama de sequencia (Figura \ref{fig:diagrama-funcionamento-guardian}) tem como inicio a interceptação de métodos. Quando o \textit{framework} é executado, um contexto de autorização nomeado AuthorizationContext é criado, este contexto contém informações sobre o objeto interceptado vide Figura \ref{fig:guardian-diagrama-classe-cap2}, além de informações que são utilizadas posteriormente para que a autorização ocorra. Após a criação do contexto de autorização, ele é invocado e o processamento da autorização é inciado (execução de AuthorizationProcessor). Para que este processamento aconteça, primeiro é preciso encontrar as implementações da interface Populator, pois elas possuem as informações necessárias para realização da autorização conforme já dito. Com as implementações encontradas, as autorizações podem ser verificadas a partir da chamada dos Authorizers recuperados dos metadados definidos no método interceptado. Estes realizam as verificações necessárias, e caso alguma seja falsa ou falhe, a exceção AuthorizationException do pacote org.esfinge.guardian.exception é lançada, retornando a mensagem de erro "Unauthorized Access", ou caso nenhuma inconsistência ou erro sejam encontrados, é permitido que o método acesse o recurso desejado inicialmente.
 
 \begin{landscape}
 

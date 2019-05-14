@@ -1,22 +1,36 @@
 \newpage
 \chapter{Conclus\~ao}
-
-\par Baseado na DSM apresentada no capítulo anterior, é possível concluir que o \textit{framework} possui baixo acoplamento com a solução desenvolvida, sendo utilizado apenas em uma classe para configuração e por classes com responsabilidades de \textit{controller}, portanto, esta solução pode ser aplicada em diversos \textit{softwares} devido a sua generalização. Também é possível identificar que a integração foi um sucesso, pois em nenhum momento durante a criação do \textit{back-end} foi preciso conhecer alguma funcionalidade do Esfinge Guardian. A única API utilizada diretamente foi o Esfinge Gamification, seus metadados e seu PD. O Esfinge Guardian é executado de forma transparente, não é preciso conhecer seu funcionamento para utilizá-lo com a integração criada, diminuindo a curva de aprendizagem do desenvolvedor e aumentando sua produtividade. Desta forma é possível dizer que como o \textit{framework} é genérico e desacoplado de domínio ele pode ser facilmente inserido como uma dependência e utilizado em diversas aplicações sem dificuldades.
+% conclusão tem que ser um resumão do trabalho inteiro. "não tem fato novo na conclusão"
+\par Com o problema encontrado neste Trabalho, que foi a falta de funcionalidades de controle de acesso no \textit{framework} Esfinge Gamification. A solução proposta foi a integração com o \textit{framework} Esfinge Guardian; para isto foi necessário utilizar os pontos de extensão presentes no \textit{framework} de segurança. Desta forma foi possível realizar a criação das funcionalidades de controle de acesso baseado em conquista que podem ser utilizadas via metadados em aplicações Java.
 
 \section{Contribuições do Trabalho}
 
-\par Com este Trabalho recursos de controle de acesso foram adicionados ao Esfinge Gamification. Assim como metadados para utilização destes recursos
+\begin{itemize}
+    \item Anotações de controle de acesso baseado em conquistas;
+    \item Integração entre o Esfinge Gamification e Esfinge Guardian;
+    \item API extensiva para criação de novas regras de autorização;
+    \item Implementação de persistência para o MongoDB;
+    \item Método para recuperar todas as conquistas por tipo;
+    \item Dependências do Esfinge Guardian foram configuradas no pom.xml do projeto para \textit{download} automático pelo Maven;
+    \item Esfinge Guardian foi configurado para possuir um Super POM e módulos;
+    \item Esfinge Guardian e Esfinge Gamification foram publicados no Maven Central para download. Esfinge Guardian com as novas configurações e Esfinge Gamification foi atualizado com as funcionalidades de autorização;
+    \item Documentação do projeto foi atualizada.
+    \end{itemize}
+
+%\par Com este Trabalho recursos de controle de acesso foram adicionados ao Esfinge Gamification, assim como metadados para utilização destes recursos. Com os resultados obtidos a partir da utilização, foi possível analisar o desacoplamento dos \textit{frameworks}, e validar que é possível adicioná-los facilmente em qualquer aplicação conforme já dito. As contribuições deste Trabalho para os projetos estão disponíveis no Maven Central para \textit{download} e utilização na organização net.sf.esfinge\footnote{https://search.maven.org/search?q=g:net.sf.esfinge}. O código fonte e suas atualizações podem ser encontrados no GitHub da organização EsfingeFramework\footnote{https://github.com/EsfingeFramework}. A documentação do projeto também foi atualizada com os novos recursos.
 
 \section{Dificuldades}
 
-\par Entender que códigos são dados e podem ser interpretados e processados não é algo trivial, assim a compreensão do paradigma reflexivo gera confusão no primeiro momento, pela inversão de pensamento que precisa existir (Figura \ref{fig:introspeccao-flow}), muitas vezes parâmetros recebidos em métodos são classes, e a partir disso a ação desejada ocorre. Ter noção de quando usar reflexão é algo interessante, pois como é um recurso caro computacionalmente falando, quando deseja-se alta performance esta não é uma boa alternativa.
+\par Entender que códigos são dados e podem ser interpretados e processados não é algo trivial, assim a compreensão do paradigma reflexivo gera confusão em um primeiro momento, pela inversão de pensamento que precisa existir (Figura \ref{fig:introspeccao-flow}), muitas vezes parâmetros recebidos em métodos são classes, e a partir disso a ação desejada ocorre. Ter noção de quando usar reflexão é algo interessante, pois como é um recurso caro computacionalmente falando, quando deseja-se alta performance, esta não é uma boa alternativa.
 
-\par A estrutura de diretórios referente as implementações de \textit{Populator} também foi uma dificuldade, devido ao não armazenamento destes arquivos na exportação do projeto Esfinge Guardian. Desta forma era necessário criar a árvore de diretórios em todos os projetos novamente, porém quando estes eram exportados não funcionavam conforme o esperado. Este problema foi solucionado com configurações criadas no arquivo de configuração POM.xml, onde ficam armazenadas as dependências e configurações de projetos com o gerenciador de dependências Maven. Após esta configuração foi verificado que apenas alterando a estrutura de diretórios de acordo com a Figura \ref{fig:populator-flow} os arquivos seriam exportados com o projeto.
+\par A estrutura de diretórios referente as implementações de Populator foi uma dificuldade devido ao não armazenamento destes arquivos na exportação do projeto Esfinge Guardian. Desta forma era necessário criar a árvore de diretórios em todos os projetos novamente, porém quando estes eram exportados não funcionavam conforme o esperado. Este problema foi solucionado com configurações criadas no arquivo de configuração pom.xml, onde ficam armazenadas as dependências e configurações de projetos com o gerenciador de dependências Maven. Após esta configuração foi verificado que apenas alterando a estrutura de diretórios de acordo com a Figura \ref{fig:populator-tree} os arquivos seriam exportados com o projeto.
+
+\par Para recuperar propriedades em arquivos o Esfinge Guardian utilizava uma implementação de ResourceBundle. Este foi um problema devido a seu propósito, pois a classe ResourceBundle tem como objetivo prover recursos variáveis para localizações para que estes sejam retornados de acordo com a localização do usuário \cite{oracleeesourcebundle}. A implementação foi alterada para a classe Properties que atende o objetivo desejado, que é a recuperação de propriedades em arquivos \cite{oracleproperties}.
 
 \section{Trabalhos futuros}
 
 \begin{itemize}
-    \item Seria interessante o método que recupera todas as conquistas por tipo existente no \textit{framework} possuir uma forma de ordenação, para no caso da criação de \textit{rankings} de posições por exemplo;
+    \item Seria interessante o método que recupera todas as conquistas por tipo existente no \textit{framework} possuir uma forma de ordenação, para no caso da criação de rankings de posições por exemplo;
     \item Adição de funcionalidades de bônus, isto é, quando os bônus são executados o dobro de pontos ou conquistas diferentes são recebidas;
     \item Adição de anotações de eventos, pois atualmente o Esfinge Gamification possui duas anotações para eventos.
     
