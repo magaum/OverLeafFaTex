@@ -1,7 +1,7 @@
 \newpage
 \chapter{Conclus\~ao}
 % conclusão tem que ser um resumão do trabalho inteiro. "não tem fato novo na conclusão"
-\par Com o problema encontrado neste Trabalho, que foi a falta de funcionalidades de controle de acesso no \textit{framework} Esfinge Gamification. A solução proposta foi a integração com o \textit{framework} Esfinge Guardian; para isto foi necessário utilizar os pontos de extensão presentes no \textit{framework} de segurança. Desta forma foi possível realizar a criação das funcionalidades de controle de acesso baseado em conquista que podem ser utilizadas via metadados em aplicações Java.
+\par A solução proposta para a falta de recursos de controle de acesso no Esfinge Gamification foi sua integração com o \textit{framework} Esfinge Guardian, que possui tais funcionalidades; para isto foi necessário utilizar os pontos de extensão presentes no \textit{framework} de segurança. Desta forma foi possível realizar a criação das funcionalidades de controle de acesso baseado em conquistas que podem ser utilizadas via metadados em aplicações Java.
 
 \section{Contribuições do Trabalho}
 
@@ -11,9 +11,9 @@
     \item API extensiva para criação de novas regras de autorização;
     \item Implementação de persistência para o MongoDB;
     \item Método para recuperar todas as conquistas por tipo;
-    \item Dependências do Esfinge Guardian foram configuradas no pom.xml do projeto para \textit{download} automático pelo Maven;
+    \item Dependências do Esfinge Guardian foram configuradas no pom.xml do projeto para \textit{download} automático das dependências transitivas pelo Maven;
     \item Esfinge Guardian foi configurado para possuir um Super POM e módulos;
-    \item Esfinge Guardian e Esfinge Gamification foram publicados no Maven Central para download. Esfinge Guardian com as novas configurações e Esfinge Gamification foi atualizado com as funcionalidades de autorização;
+    \item Esfinge Guardian e Esfinge Gamification foram publicados no Maven Central para \textit{download}. Esfinge Guardian com as novas configurações e Esfinge Gamification foi atualizado com as funcionalidades de autorização;
     \item Documentação do projeto foi atualizada.
     \end{itemize}
 
@@ -25,7 +25,7 @@
 
 \par A estrutura de diretórios referente as implementações de Populator foi uma dificuldade devido ao não armazenamento destes arquivos na exportação do projeto Esfinge Guardian. Desta forma era necessário criar a árvore de diretórios em todos os projetos novamente, porém quando estes eram exportados não funcionavam conforme o esperado. Este problema foi solucionado com configurações criadas no arquivo de configuração pom.xml, onde ficam armazenadas as dependências e configurações de projetos com o gerenciador de dependências Maven. Após esta configuração foi verificado que apenas alterando a estrutura de diretórios de acordo com a Figura \ref{fig:populator-tree} os arquivos seriam exportados com o projeto.
 
-\par Para recuperar propriedades em arquivos o Esfinge Guardian utilizava uma implementação de ResourceBundle. Este foi um problema devido a seu propósito, pois a classe ResourceBundle tem como objetivo prover recursos variáveis para localizações para que estes sejam retornados de acordo com a localização do usuário \cite{oracleeesourcebundle}. A implementação foi alterada para a classe Properties que atende o objetivo desejado, que é a recuperação de propriedades em arquivos \cite{oracleproperties}.
+\par Para recuperar propriedades em arquivos o Esfinge Guardian utilizava uma implementação de ResourceBundle. Este foi um problema devido a seu propósito, pois a classe ResourceBundle tem como objetivo prover recursos variáveis para localizações, ou seja, de acordo com a localização do usuário diferentes traduções de uma palavra podem ser retornadas por exemplo \cite{oracleeesourcebundle}. A implementação foi alterada para a classe Properties que atende o objetivo desejado, que é a recuperação de propriedades em arquivos \cite{oracleproperties}.
 
 \section{Trabalhos futuros}
 
@@ -33,5 +33,7 @@
     \item Seria interessante o método que recupera todas as conquistas por tipo existente no \textit{framework} possuir uma forma de ordenação, para no caso da criação de rankings de posições por exemplo;
     \item Adição de funcionalidades de bônus, isto é, quando os bônus são executados o dobro de pontos ou conquistas diferentes são recebidas;
     \item Adição de anotações de eventos, pois atualmente o Esfinge Gamification possui duas anotações para eventos.
+    \item Padronização da localização das anotações, pois o Esfinge Gamification recupera metadados existentes em intefaces e o Esfinge Guardian em classes.
+    \item Integração contínua e entrega contínua no Maven Central, para que quando novas versões serem lançadas fiquem disponível para desenvolvedores.
     
 \end{itemize}

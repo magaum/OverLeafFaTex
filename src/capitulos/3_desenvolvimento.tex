@@ -56,7 +56,7 @@ public class AuthorizationSample {
 {Produção do autor}
 \end{image}
 
-\par A Figura \ref{fig:execao-configuracao} exibe a configuração realizada na classe User para que a autorização seja monitorada pelo Esfinge Guardian. A linha 11 exibe a anotação @AllowRankingAndLevel que define a regra citada no inicio desta seção.
+\par A Figura \ref{fig:execao-configuracao} exibe a configuração realizada na classe User para que a autorização seja monitorada pelo Esfinge Guardian. A linha 11 exibe a anotação @AllowRankingAndLevel que define a regra citada no início desta seção.
 
 \begin{figure}[H]
     \centering
@@ -86,7 +86,7 @@ public class User implements Person {
     \fonte{Produção do autor}
 \end{figure}
 
-\par Para que notas pudessem ser adicionadas pelo usuário seria necessário adicionar o Ranking utilizado na regra de autorização, descrita no inicio desta seção. O exemplo apresentado na Figura \ref{fig:autorizacao-ok} exibe um novo método criado para a atribuição desta autorização por meio da adição do Achievement necessário.
+\par Para que notas pudessem ser adicionadas pelo usuário seria necessário adicionar o Ranking utilizado na regra de autorização, descrita no início desta seção. O exemplo apresentado na Figura \ref{fig:autorizacao-ok} exibe um novo método criado para a atribuição desta autorização por meio da adição do Achievement necessário.
 
 \begin{figure}[H]
     \centering
@@ -153,6 +153,7 @@ public class AuthorizationSample {
     \centering
     \caption{Fluxo de funcionamento atual do Esfinge Gamification}
     \includegraphics[scale=0.3]{src/imagens/cap3/fluxo-atual.png}
+    \fonte{Produção do autor}
     \label{fig:fluxo-atual}
 \end{figure}
 
@@ -194,7 +195,7 @@ public class GameProxy implements InvocationHandler {
     \fonte{Produção do autor}
 \end{figure}
 
-\par Desta forma a responsabilidade de execução é passada para o Esfinge Guardian e as validações ocorrem de acordo com o diagrama de sequencia exibido na Figura \ref{fig:diagrama-funcionamento-guardian}.
+\par Desta forma a responsabilidade de execução é passada para o Esfinge Guardian e as validações ocorrem de acordo com o diagrama de sequência exibido na Figura \ref{fig:diagrama-funcionamento-guardian}.
 
 \section{Diagrama de classes}
 
@@ -250,6 +251,7 @@ Anotação & Comportamento \\ \hline
 \label{tab:autorizacoes}
 \\ \hline
 \end{longtable}
+\fonte{Produção do autor}
 
 \par A partir destas anotações é possível adicionar metadados em métodos que necessitam de autorização para execução.
 
@@ -305,6 +307,7 @@ public abstract class AuthorizationProcessor {
 }
     \end{java}
     \label{fig:authorization-processor}
+    \fonte{Produção do autor}
 \end{figure}
 
 \par Com essas implementações foi possível realizar a integração dos \textit{frameworks} e o controle de acesso baseado em conquistas cumprindo os objetivos definidos.

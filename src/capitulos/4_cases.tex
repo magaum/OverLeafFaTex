@@ -1,7 +1,7 @@
 \newpage
 \chapter{Estudo de caso}
 
-\par Neste capitulo serão apresentados os testes implementados com a solução desenvolvida, a fim de validar o funcionamento a partir de duas perguntas de pesquisa (PP):
+\par Neste capítulo serão apresentados os testes implementados com a solução desenvolvida, a fim de avaliar o funcionamento a partir de duas perguntas de pesquisa (PP):
 
 \begin{itemize}
     \item PP1: O acoplamento entre o \textit{framework} e a aplicação é baixo?
@@ -10,11 +10,11 @@
 
 \section{Metodologia}
 
-\par Para o desenvolvimento e testes do estudo de caso é necessário que a aplicação criada possua controle de acesso em funcionalidades, incremento de pontos e adição de Achievements em determinadas situações. Quando algum erro ocorrer mensagens descritivas deverão ser exibidas. Os testes serão validados a partir de \textit{logs} da aplicação, onde mensagens de sucesso e falha são exibidos. %O acoplamento entre o \textit{framework} e a aplicação desenvolvida serão analisados a partir de uma matriz de dependência estrutural.
+\par Para o desenvolvimento e testes do estudo de caso é necessário que a aplicação criada possua controle de acesso em funcionalidades, incremento de pontos e adição de Achievements em determinadas situações. Quando algum erro ocorrer mensagens descritivas deverão ser exibidas. Os testes serão avaliados a partir de \textit{logs} da aplicação, onde mensagens de sucesso e falha são exibidos. %O acoplamento entre o \textit{framework} e a aplicação desenvolvida serão analisados a partir de uma matriz de dependência estrutural.
 
 \section{Aplicação desenvolvida}
 
-\par Foi desenvolvida uma aplicação \textit{web}\footnote{O estudo de caso está disponível no endereço https://forum-tg.netlify.com} para utilização dos recursos desenvolvidos, com o objetivo de compartilhamento de ideias e conversas sobre assuntos gerais. Para incentivar a interação entre os usuários as regras da Figura \ref{fig:regras-do-forum} foram definidas. A partir destas regras novas funcionalidades são desbloqueadas conforme a utilização da aplicação, e assim, consequentemente, os usuários interagem entre si.
+\par Foi desenvolvida uma aplicação \textit{web}\footnote{O estudo de caso está disponível no endereço https://forum-tg.netlify.com} para utilização dos recursos desenvolvidos, com o objetivo de compartilhamento de ideias e conversas sobre assuntos gerais. Esta aplicação utiliza os mecanismos de pontos e troféus para incentivar a interação entre os usuários, a partir destes mecanismos as regras da Figura \ref{fig:regras-do-forum} foram definidas. Quando usuários conseguem ultrapassar as restrições impostas pelas regras novas funcionalidades são desbloqueadas conforme a utilização da aplicação, e assim, consequentemente, os usuários interagem entre si.
 
 \begin{image}
 {0.23}
@@ -28,7 +28,7 @@
 
 \section{Fluxo de funcionamento}
 
-\par O primeiro caso de teste tem como objetivo mostrar que o Esfinge Guardian não interfere no fluxo de funcionamento do Esfinge Gamification quando não há anotações de segurança, permitindo que os recursos antigos de gamificação sejam utilizados normalmente. Para validar essa premissa, um tópico será adicionado com o usuário teste. Quando o usuário acessar seu perfil poderá visualizar que possui agora 10 pontos.
+\par O primeiro caso de teste tem como objetivo mostrar que o Esfinge Guardian não interfere no fluxo de funcionamento do Esfinge Gamification quando não há anotações de segurança, permitindo que os recursos de gamificação sejam utilizados normalmente. Para validar essa premissa, um tópico será adicionado com o usuário teste. Quando o usuário acessar seu perfil poderá visualizar que possui agora 10 pontos.
 
 \par Na primeira etapa o usuário teste será criado no \textit{site} para que não possua nenhum ponto, a Figura \ref{fig:ct1-passo1-cadastro} exibe o formulário de cadastro com as informações preenchidas.
 
@@ -213,17 +213,38 @@
 
 \section{Matriz de Dependência Estrutural}
 
-\par Matriz de Dependência Estrutural, do inglês \textit{Dependency Structure Matrix} (DSM), tem como objetivo facilitar a visualização entre as dependências do projeto, o acoplamento entre as classes \cite{browning2001applying}. Neste caso o que será abordado é o acoplamento envolvendo a aplicação e o Esfinge Gamification, que foi utilizado na classe GameSetup, presente no pacote br.inpe.forum.gamification. É possível visualizar na Figura \ref{fig:dsm-classes} que esta classe depende apenas de MongoFactory, devido a identificação amarela a sua esquerda. Já as classes que dependem de GameSetup são os \textit{controllers} do \textit{site}, devido a sua responsabilidade, que é a tratativa das requisições.
+\par Matriz de Dependência Estrutural, do inglês \textit{Dependency Structure Matrix} (DSM), tem como objetivo facilitar a visualização entre as dependências do projeto, o acoplamento entre as classes \cite{browning2001applying}. Neste caso o que será abordado é o acoplamento envolvendo a aplicação e o Esfinge Gamification, a partir das Figuras \ref{fig:dsm-configuration-game-setup} e \ref{fig:dsm-service}.
 
-\par Este foi o ponto ideal para interceptações, pois quando \textit{controllers} invocam a lógica de negócios na camada de serviço (pacote br.inpe.forum.service), a invocação é interceptada e os metadados definidos nas classes de serviço são lidos pelo \textit{framework}, que realiza o comportamento definido no metadado, conforme exibido nos testes anteriores.
+\par A Figura \ref{fig:dsm-configuration-game-setup} exibe o acoplamento envolvendo a configuração do \textit{framework}, esta é realizada na classe GameSetup, presente no pacote br.inpe.forum.gamification. É possível visualizar que esta classe depende de 2 módulos do \textit{framework}: 1) Para criação e interceptação do PD (A); 2) Para definição de persistência de dados (B). Estas dependências são identificadas em amarelo após o nome dos pacotes. Já as classes que dependem de GameSetup são os \textit{controllers} da aplicação, devido a sua responsabilidade, que é a tratativa das requisições.
 
 \begin{image}
-{0.4}
-{src/imagens/cap4/dsm-classes-forum.png}
-{DSM do projeto desenvolvido}
-{fig:dsm-classes}
+{0.27}
+{src/imagens/cap4/dsm-configuration-edited-1.png}
+{DSM de configuração do \textit{framework}}
+{fig:dsm-configuration-game-setup}
 {Produção do autor}
 \end{image}
 
-\par Baseado na DSM apresentada é possível responder a PP1 positivamente, pois o \textit{framework} possui baixo acoplamento com a solução desenvolvida, sendo utilizado apenas em uma classe para configuração, por classes com responsabilidades de \textit{controller} para que os métodos pudessem ser interceptados e pelo serviço responsável por recuperar informações de gamificação de usuários, a principal interface entre o \textit{framework} e a aplicação desenvolvida são as anotações que adicionam os metadados necessários. A respeito da PP2 é possível identificar que a integração foi um sucesso e que o controle de acesso é eficaz devido aos testes executados nesta seção. Todas as execuções que precisariam ser validadas pelo Esfinge Guardian foram registradas com sucesso pelo servidor a partir de \textit{logs} que confirmaram esta validação. 
-\par Desta forma é possível dizer que o Esfinge Gamification é desacoplado de domínio, desta forma, pode ser facilmente inserido como uma dependência e utilizado em diversas aplicações sem dificuldades, devido a sua generalização.
+\par Este foi o ponto ideal para interceptações, pois quando \textit{controllers} invocam a lógica de negócios na camada de serviço (pacote br.inpe.forum.service), a invocação é interceptada e os metadados definidos nas classes de serviço são lidos pelo \textit{framework}, que realiza o comportamento definido no metadado, conforme exibido nos testes anteriores.
+
+\par A Figura \ref{fig:dsm-service} apresenta a DSM do pacote de serviço, onde as definições de metadados são adicionadas. Como metadados de controle de acesso foram definidos nestas classes, as anotações de segurança (A, B) viram dependências. As dependências C e D existem, pois foi implementado um serviço que recupera dados de gamificação de usuários, portanto é preciso recuperar a instância de Game que é gerenciada pela classe GameProxy (C), e assim recuperar os dados armazenados com a especialização de Game (D).
+
+\begin{image}
+{0.27}
+{src/imagens/cap4/dsm-service-edited-1.png}
+{DSM classes serviço}
+{fig:dsm-service}
+{Produção do autor}
+\end{image}
+
+%\begin{image}
+%{0.4}
+%{src/imagens/cap4/dsm-classes-forum.png}
+%{DSM do projeto desenvolvido}
+%{fig:dsm-classes}
+%{Produção do autor}
+%\end{image}
+
+\par Baseado nas DSMs apresentadas é possível responder a PP1 positivamente, pois o \textit{framework} possui baixo acoplamento com a solução desenvolvida, sendo utilizado apenas em uma classe para configuração, esta é utilizada por classes com responsabilidade de \textit{controller}, para que os métodos possam ser interceptados e pelo serviço responsável por recuperar informações de gamificação de usuários. A principal interface entre o \textit{framework} e a aplicação desenvolvida são as anotações que adicionam os metadados necessários. 
+\par A respeito da PP2 é possível concluir que a integração foi um sucesso e que o controle de acesso é eficaz devido aos testes executados nesta seção. Todas as execuções que precisariam ser validadas pelo Esfinge Guardian foram registradas com sucesso pelo servidor a partir de \textit{logs} que confirmaram esta validação. 
+\par Desta forma é possível dizer que o Esfinge Gamification é desacoplado de domínio, pode ser facilmente inserido como uma dependência e utilizado em diversas aplicações sem dificuldades, devido a sua generalização.
