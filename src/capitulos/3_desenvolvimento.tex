@@ -9,7 +9,7 @@
 %\section{Método \textit{getAllAchievements}}
 %\par Foi criado um método para recuperar todos as conquistas por tipo, como a próxima listagem irá exibir, este método recebe como parâmetro uma classe que estenda a classe abstrata \textit{Achievement}, portanto uma conquista, a partir deste parâmetro as conquistas serão recuperadas. A utilidade deste método é o auxilio na criação de rankings e/ou a comparações entre todos os usuários.
 
-\par Este capítulo detalha as soluções desenvolvidas para o problema citado na introdução do TG.
+\par Este capítulo detalha as soluções desenvolvidas para o problema citado na introdução do Trabalho de Graduação (TG).
 
 \section{Visão geral}
 
@@ -46,7 +46,7 @@ public class AuthorizationSample {
     \fonte{Produção do autor}
 \end{figure}
 
-\par Neste exemplo o usuário definido para ser utilizado nas lógicas de validação e gamificação do \textit{framework} tenta alterar suas notas na linha 20 e recebe a exceção "Unauthorized Access"\ do pacote org.esfinge.guardian.exception.AuthorizationException devido a falta do Ranking e do Level necessários definidos anteriormente conforme Figura \ref{fig:exemplo-nao-autorizado}.
+\par Neste exemplo o usuário definido para ser utilizado nas lógicas de validação e gamificação do \textit{framework} tenta alterar suas notas na linha 19 e recebe a exceção "Unauthorized Access"\ do pacote org.esfinge.guardian.exception.AuthorizationException devido a falta do Ranking e do Level necessários definidos anteriormente conforme Figura \ref{fig:exemplo-nao-autorizado}.
 
 \begin{image}
 {0.4}
@@ -101,11 +101,12 @@ public interface Person {
 }
     \end{java}
     \label{fig:autorizacao-ok}
+    \fonte{Produção do autor}
 \end{figure}
 
-\par A única alteração feita para a adição das notas ser autorizada é a ordem das chamadas, como é possível observar na Figura \ref{fig:hellow-world-gamification-autorizada} onde o método promotePerson() é invocado na linha 18, para que o Achievement utilizado na autorização seja adicionado, após isto a adição da nota é feita pelo usuário.
+\par A única alteração feita para a adição das notas ser autorizada é a ordem das chamadas, como é possível observar na Figura \ref{fig:hellow-world-gamification-autorizada} onde o método promotePerson() é invocado na linha 16, para que o Achievement utilizado na autorização seja adicionado, após isto a adição da nota é feita pelo usuário na linha 17.
 
-\par A Figura \ref{fig:exemplo-autorizado-ok} apresenta a execução autorizada pelo \textit{framework}, nesta é possível verificar que a mensagem exibida é "Authorized access".
+\par A Figura \ref{fig:exemplo-autorizado-ok} apresenta a execução autorizada pelo \textit{framework}, nesta é possível verificar que a mensagem exibida em vermelho é "Authorized access".
 
 \begin{figure}[H]
     \centering
@@ -120,7 +121,7 @@ public class AuthorizationSample {
 		user.setRa("C1A252019");
 		
 		Game game = new GameMemoryStorage();
-    	         GameInvoker.getInstance().setGame(game);
+    	GameInvoker.getInstance().setGame(game);
 		UserStorage.setUserID(user.getRa());
 
 		Person pdUser = GameProxy.createProxy(user);
@@ -128,12 +129,14 @@ public class AuthorizationSample {
 		// a anotacao neste metodo faz o usuario possuir o Achievement utilizado na regra de autorizacao
 		pdUser.promotePerson();
 		pdUser.addNote(10.0);
-
 	}
 }
     \end{java}
     \label{fig:hellow-world-gamification-autorizada}
+    \fonte{Produção do autor}
 \end{figure}
+
+\par Nas Figuras \ref{fig:exemplo-nao-autorizado} e \ref{fig:exemplo-autorizado-ok} os logs citados no fluxo de funcionamento do \textit{framework} (Figura  \ref{fig:diagrama-funcionamento-gamification}) podem ser visualizados. Estes tem como objetivo evidenciar a análise do Esfinge Guardian durante a interceptação.
 
 \begin{image}
 {0.4}
@@ -142,8 +145,6 @@ public class AuthorizationSample {
 {fig:exemplo-autorizado-ok}
 {Produção do autor}
 \end{image}
-
-\par Nas Figuras \ref{fig:exemplo-nao-autorizado} e \ref{fig:exemplo-autorizado-ok} os logs citados no fluxo de funcionamento do \textit{framework} (Figura  \ref{fig:diagrama-funcionamento-gamification}) podem ser visualizados. Estes tem como objetivo evidenciar a análise do Esfinge Guardian durante a interceptação. 
 
 \section{Fluxo de funcionamento}
 
@@ -211,7 +212,7 @@ public class GameProxy implements InvocationHandler {
 
 \section{Integração}
 
-\par Durante o fluxo de execução do Esfinge Guardian (Figura \ref{fig:diagrama-funcionamento-guardian}), implementações da interface Populator são procuradas para recuperação de informações necessárias para autorização. A implementação criada para recuperação dos dados de gamificação foi chamada de GamificationAuthorizationPopulator conforme citado anteriormente, seu funcionamento é detalhado na Figura \ref{fig:bpmn-gamification-populator}. Segundo o capítulo \ref{ch:fundamentacao} onde o processo de extensão do Esfinge Guardian foi abordado, as implementações de Populator precisariam ser expostas de alguma forma para o \textit{framework}. O método de configuração escolhido foi via arquivo de configuração, portanto existe um arquivo chamado org.esfinge.guardian.populator.Populator com o conteúdo net.sf.esfinge.gamification.guardian.GamificationAuthorizationPopulator localizado no diretório resources/META-INF/services.
+\par Durante o fluxo de execução do Esfinge Guardian (Figura \ref{fig:diagrama-funcionamento-guardian}), implementações da interface Populator são procuradas para recuperação de informações necessárias para autorização. A implementação criada para recuperação dos dados de gamificação foi chamada de GamificationAuthorizationPopulator conforme citado anteriormente, seu funcionamento é detalhado na Figura \ref{fig:bpmn-gamification-populator}. Segundo a seção \ref{sc:extensao-guardian} onde o processo de extensão do Esfinge Guardian foi abordado, as implementações de Populator precisariam ser expostas de alguma forma para o \textit{framework}. O método de configuração escolhido foi via arquivo de configuração, portanto existe um arquivo chamado org.esfinge.guardian.populator.Populator com o conteúdo net.sf.esfinge.gamification.guardian.GamificationAuthorizationPopulator localizado no diretório resources/META-INF/services.
 
 \begin{image}
 {0.5}
@@ -257,7 +258,7 @@ Anotação & Comportamento \\ \hline
 
 \section{Processo de autorização}
 
-\par Para cada anotação criada foi preciso implementar a interface Authorizer conforme descrito anteriormente no capítulo \ref{ch:fundamentacao}. Na Figura \ref{fig:processo-autorizacao-gamification} é possível visualizar o processo realizado pelo Esfinge Guardian para verificar as informações de gamificação do usuário.
+\par Para cada anotação criada foi preciso implementar a interface Authorizer conforme descrito anteriormente. Na Figura \ref{fig:processo-autorizacao-gamification} é possível visualizar o processo realizado pelo Esfinge Guardian para verificar as informações de gamificação do usuário.
 
 \begin{image}
 {0.53}
@@ -270,7 +271,7 @@ Anotação & Comportamento \\ \hline
 %s Figuras \ref{fig:allow-trophy} e \ref{fig:allow-trophy-authorizer} a anotação @AllowTrophy e a classe AllowTrophyAuthorizer serão abordadas para melhor entendimento do que foi desenvolvido.
 
 \par Todas as implementações de Authorizer criadas estendem a classe abstrata AuthorizationProcessor (Figura \ref{fig:authorization-processor}), que tem como objetivo principal a recuperação do Achievement utilizado na autorização e a validação da anotação de segurança recebida conforme já dito. É possível verificar nas linhas 5 e 6 que o Game e o usuário inseridos no contexto de autorização pela classe GamificationAuthorizationPopulator (Figura \ref{fig:bpmn-gamification-populator}) são utilizados nesta etapa, pois o Achievement é buscado e recuperado com estas informações na linha 25.
-\par Na linha 8 a anotação de autorização recebida é validada para que exceção NullPointerException não ocorra em tempo de execução quando o tipo da anotação for recuperado via reflexão (linha 12). Como as implementações de Achievement presentes no Esfinge Gamification devem possuir um método para recuperar seu nome (Figura \ref{fig:interface-achievement}), foi criada a definição programática "achievementName"\ para as anotações de segurança, isto é, toda anotação de segurança possui uma propriedade chamada "achievementName()", possibilitando assim a recuperação do nome do Achievement via reflexão, processo realizado nas linhas 16 e 17.
+\par Na linha 8 a anotação de autorização recebida é validada para que exceção NullPointerException não ocorra em tempo de execução quando o tipo da anotação for recuperado via reflexão (linha 12). Como as implementações de Achievement presentes no Esfinge Gamification devem possuir um método para recuperar seu nome (Figura \ref{fig:interface-achievement}), foi criada a convenção de código "achievementName"\ para as anotações de segurança, isto é, toda anotação de segurança possui uma propriedade chamada "achievementName()", possibilitando assim a recuperação do nome do Achievement via reflexão, processo realizado nas linhas 16 e 17.
 
 \begin{figure}[H]
     \centering

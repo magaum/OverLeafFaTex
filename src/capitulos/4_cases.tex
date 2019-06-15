@@ -80,7 +80,7 @@
 {Produção do autor}
 \end{image}
 
-\par Com as evidências exibidas acima ainda não é possível fazer a identificação de que validações de segurança não foram executadas. Para realizar isto foi preciso verificar os \textit{logs} do servidor. A Figura \ref{fig:ct1-heroku-logs} exibe estes \textit{logs} separados por cores verdes, isto é, a cada linha com o inicio verde onde a data é exibida, um novo \textit{log} foi registrado. O primeiro \textit{log} são registros do clique no botão "Salvar"\ (Figura \ref{fig:topico-criado}), onde uma requisição do tipo \textit{POST} é feita para que o tópico seja salvo. O segundo \textit{log} é o redirecionamento para a página inicial (Figura \ref{fig:tela-inicial-apos-criacao-do-topico}), onde uma requisição \textit{GET} é feita para recuperação dos tópicos existentes.
+\par Com as evidências exibidas acima ainda não é possível fazer a identificação de que validações de segurança não foram executadas. Para realizar isto foi preciso verificar os \textit{logs} do servidor. A Figura \ref{fig:ct1-heroku-logs} exibe estes \textit{logs} separados por cores verdes, isto é, a cada linha com o inicio verde onde a data é exibida, um novo \textit{log} foi registrado. O primeiro \textit{log} são registros do clique no botão "Salvar"\ (Figura \ref{fig:topico-criado}), onde uma requisição do tipo POST é feita para que o tópico seja salvo. O segundo \textit{log} é o redirecionamento para a página inicial (Figura \ref{fig:tela-inicial-apos-criacao-do-topico}), onde uma requisição GET é feita para recuperação dos tópicos existentes.
 
 \begin{image}
 {0.23}
@@ -120,8 +120,8 @@
 
 \section{Usuário sem permissão}
 
-\par As restrições serão validadas neste caso de teste, em específico a anotação \textit{@AllowPointGreaterThan}, que tem como objetivo controlar o acesso de usuários baseando-se em seus pontos, conforme citado na Tabela \ref{tab:autorizacoes}.
-\par Quando um usuário possuir menos de 50 pontos, de acordo com as regras do fórum (Figura \ref{fig:regras-do-forum}), este não deve conseguir concluir o processo de atualização do tópico. Para realizar este teste o usuário weslei foi definido, ele possui 10 pontos atualmente, tendo criado apenas um tópico no \textit{site}. O conteúdo do tópico será alterado e uma requisição do tipo \textit{PUT} será realizada ao servidor para salvar as alterações. O usuário deverá receber a mensagem de erro "Você não possui permissão para atualizar tópicos!"\ devido a falta de pontos.
+\par As restrições serão validadas neste caso de teste, em específico a anotação @AllowPointGreaterThan, que tem como objetivo controlar o acesso de usuários baseando-se em seus pontos, conforme citado na Tabela \ref{tab:autorizacoes}.
+\par Quando um usuário possuir menos de 50 pontos, de acordo com as regras do fórum (Figura \ref{fig:regras-do-forum}), este não deve conseguir concluir o processo de atualização do tópico. Para realizar este teste o usuário weslei foi definido, ele possui 10 pontos atualmente, tendo criado apenas um tópico no \textit{site}. O conteúdo do tópico será alterado e uma requisição do tipo PUT será realizada ao servidor para salvar as alterações. O usuário deverá receber a mensagem de erro "Você não possui permissão para atualizar tópicos!"\ devido a falta de pontos.
 
 \par Na Figura \ref{fig:ct3-visualizacao-conteudo} o usuário está na página de visualização detalhada do tópico. É importante ressaltar que os botões "Editar"\ e "Excluir"\ ficam disponíveis apenas para o proprietário do conteúdo. 
 
@@ -143,7 +143,7 @@
 {Produção do autor}
 \end{image}
 
-\par O botão "Salvar alterações"\ é selecionado pelo usuário e consequentemente uma requisição \textit{PUT} é feita ao servidor para salvar o conteúdo modificado. As validações são feitas pelo \textit{back-end} e a mensagem de erro "Você não possui permissão para atualizar tópicos!" é exibida ao usuário conforme Figura \ref{fig:ct3-mensagem-de-permissao-negada}
+\par O botão "Salvar alterações"\ é selecionado pelo usuário e consequentemente uma requisição PUT é feita ao servidor para salvar o conteúdo modificado. As validações são feitas pelo \textit{back-end} e a mensagem de erro "Você não possui permissão para atualizar tópicos!"\ é exibida ao usuário conforme Figura \ref{fig:ct3-mensagem-de-permissao-negada}
 
 \begin{image}
 {0.23}
@@ -156,7 +156,7 @@
 \par Seguindo o raciocínio do primeiro teste, apenas a mensagem de erro no \textit{front-end} não é suficiente para validação. Na Figura \ref{fig:processo-autorizacao-gamification} é citada a criação de \textit{logs} durante a validação do Esfinge Guardian. Estes \textit{logs} são criados justamente para identificação de quando acessos a recursos protegidos são feitos. A Figura \ref{fig:log-nao-autorizado} exibe o \textit{log} registrado no momento da requisição inválida realizada pelo usuário weslei, validando o teste.
 
 \begin{image}
-{0.23}
+{0.15}
 {src/imagens/cap4/ct3/ct3-log-nao-autorizado.png}
 {\textit{Log} de falta de autorização ao realizar operação de atualização de tópico}
 {fig:log-nao-autorizado}
@@ -202,14 +202,14 @@
 \par No servidor é possível identificar a verificação realizada pelo Esfinge Guardian. A Figura \ref{fig:ct4-validacao-guardian} exibe os \textit{logs} registrados.
 
 \begin{image}
-{0.23}
+{0.15}
 {src/imagens/cap4/ct4/ct4-validacao-guardian.png}
 {Pontuação do usuário weslei}
 {fig:ct4-validacao-guardian}
 {Produção do autor}
 \end{image}
 
-\par Como esperado, o servidor registrou \textit{logs} validando a requisição feita pelo usuário weslei, comprovando que o Esfinge Guardian analisou os dados de gamificação para autorizar a requisição. Um ponto interessante deste \textit{log}, é que a mensagem retornada pelo Esfinge Guardian referente a requisição \textit{PUT} é exibida antes do \textit{log} da própria requisição, o que pode gerar confusão. Entretanto o \textit{log} de validação registrado pelo Esfinge Guardian é relativo ao processo de autorização desencadeado pela requisição \textit{PUT}, realizada pelo usuário weslei.
+\par Como esperado, o servidor registrou \textit{logs} validando a requisição feita pelo usuário weslei, comprovando que o Esfinge Guardian analisou os dados de gamificação para autorizar a requisição. Um ponto interessante deste \textit{log}, é que a mensagem retornada pelo Esfinge Guardian referente a requisição PUT é exibida antes do \textit{log} da própria requisição, o que pode gerar confusão em um primeiro momento de análise, entretanto o \textit{log} de validação registrado pelo Esfinge Guardian é relativo ao processo de autorização desencadeado pela requisição PUT, realizada pelo usuário weslei.
 
 \section{Matriz de Dependência Estrutural}
 

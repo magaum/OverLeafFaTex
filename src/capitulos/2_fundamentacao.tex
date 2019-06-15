@@ -40,7 +40,7 @@ Assim, o código precisa ser compilado apenas uma vez para funcionar em qualquer
 {\citeonline{guerra2014componentes}} %font
 \end{image}
 
-\par Com reflexão é possível recuperar informações padrões sobre os dados (classes, métodos e atributos), porém não é possível realizar processos mais sofisticados como validações ou alguma regra de negócio baseando-se nisto apenas \cite{guerra2010architectural}, para este tipo de necessidade foi criada uma forma de adição de metadados em Java, para facilitar este processo que era realizado via arquivos ou recursos externos, esta solução foi a criação das anotações \citeonline{jcp175metadata2002facility}.
+\par Com reflexão é possível recuperar informações padrões sobre os dados (classes, métodos e atributos), porém não é possível realizar processos mais sofisticados como validações ou alguma regra de negócio baseando-se nisto apenas \cite{guerra2010architectural}, para este tipo de necessidade foi criada uma forma de adição de metadados em Java, para facilitar este processo que era realizado via arquivos ou recursos externos, esta solução foi a criação das anotações \cite{jcp175metadata2002facility}.
 
 \subsubsection{\textit{Proxy} Dinâmico}
 
@@ -310,7 +310,7 @@ public interface CrudRepository<T, Integer> {
     \fonte{Adaptado de \citeonline{xml-hibernate-configuration}}
 \end{figure}
 
-\par Para resolver estes problemas as anotações foram criadas conforme JCP 269 \citeonline{jcp2005annotation269}. Com as anotações os metadados são inseridos no próprio código, deixando a semântica mais fluída e menos verbosa. Na Figura \ref{fig:classe-metadado} é realizada a mesma configuração da Figura \ref{fig:arquivo-metadado}, neste exemplo é possível analisar a facilidade que as anotações trouxeram para o desenvolvimento, possibilitando que metadados sejam adicionados de uma forma mais natural, fazendo parte da própria linguagem.
+\par Para resolver estes problemas as anotações foram criadas conforme JCP 269 \cite{jcp2005annotation269}. Com as anotações os metadados são inseridos no próprio código, deixando a semântica mais fluída e menos verbosa. Na Figura \ref{fig:classe-metadado} é realizada a mesma configuração da Figura \ref{fig:arquivo-metadado}, neste exemplo é possível analisar a facilidade que as anotações trouxeram para o desenvolvimento, possibilitando que metadados sejam adicionados de uma forma mais natural, fazendo parte da própria linguagem.
 
 \par Estas informações são lidas utilizando técnicas de introspecção citadas anteriormente, desta forma o acoplamento existente é baseado nos metadados, assim o \textit{framework} e seus dependentes podem ser modificados sem grandes problemas. A Figura \ref{fig:frameworks-reflexivos} exibe a diferença entre o acoplamento existente em \textit{frameworks} tradicionais e baseados em reflexão e metadados.
 
@@ -352,17 +352,18 @@ public class Pessoa implements Serializable {
 
 \section{Gamificação}
 
-\par Gamificação pode ser definida como a utilização de conceitos de \textit{design} de jogos, como: Ganho de pontos, \textit{ranking}, troféus, e \textit{rewards} em aplicações de outros contextos \cite{deterding2011gamification}. \textit{Softwares} de \textit{e-commerce}, sites de \textit{e-learning}, são alguns exemplos de contextos onde a gamificação pode ser aplicada. Um exemplo de aplicação que utiliza gamificação é a Foldit \cite{burke2012behind}, que utiliza conceitos de pontos e troféus em um jogo de quebra cabeça, para na verdade, prever a estrutura da proteína humana \cite{deterding2011gamification}. O propósito da gamificação é fazer com que a utilização das aplicações não diminua com o tempo e proporcione experiências melhores ao usuário, pois as conquistas adquiridas durante a utilização incentivam a continuidade. A Psicologia Comportamental trata desta abordagem utilizada na gamificação como reforços positivos e negativos \cite{skinner1990behavior}. Os reforços positivos tem como objetivo estimular indivíduos a repetirem ações a partir da agregação de algo, na gamificação isto é aplicado com a ideia da aquisição das conquistas, e como já dito, isto estimula o indivíduo a continuar os processos que está fazendo para receber mais conquistas. Por outro lado, existem os reforços negativos, que incentivam o indivíduo a realizar o processo inverso do que foi feito para receber este estímulo, isto é, o comportamento é condicionado a partir de processos para evitar alguma situação, como por exemplo perder pontos ou perder posições no ranking se tratando de gamificação, isto gera efeitos colaterais como fuga e esquiva no indivíduo e este aprende naturalmente a evitar reforços negativos \cite{linehan2015gamification}. Nas duas formas é possível condicionar o indivíduo a realizar atividades para chegar a um propósito.
+\par Gamificação pode ser definida como a utilização de conceitos de \textit{design} de jogos, como: Ganho de pontos, \textit{ranking}, troféus, e \textit{rewards} em aplicações de outros contextos \cite{deterding2011gamification}. \textit{Softwares} de \textit{e-commerce}, \textit{sites} de \textit{e-learning}, são alguns exemplos de contextos onde a gamificação pode ser aplicada. Um exemplo de aplicação que utiliza gamificação é a Foldit \cite{burke2012behind}, que utiliza conceitos de pontos e troféus em um jogo de quebra cabeça, para na verdade, prever a estrutura da proteína humana \cite{deterding2011gamification}. O propósito da gamificação é fazer com que a utilização das aplicações não diminua com o tempo e proporcione experiências melhores ao usuário, pois as conquistas adquiridas durante a utilização incentivam a continuidade. A Psicologia Comportamental trata desta abordagem utilizada na gamificação como reforços positivos e negativos \cite{skinner1990behavior}. Os reforços positivos tem como objetivo estimular indivíduos a repetirem ações a partir da agregação de algo, na gamificação isto é aplicado com a ideia da aquisição das conquistas, e como já dito, isto estimula o indivíduo a continuar os processos que está fazendo para receber mais conquistas. Por outro lado, existem os reforços negativos, que incentivam o indivíduo a realizar o processo inverso do que foi feito para receber este estímulo, isto é, o comportamento é condicionado a partir de processos para evitar alguma situação, como por exemplo perder pontos ou perder posições no ranking se tratando de gamificação, isto gera efeitos colaterais como fuga e esquiva no indivíduo e este aprende naturalmente a evitar reforços negativos \cite{linehan2015gamification}. Nas duas formas é possível condicionar o indivíduo a realizar atividades para chegar a um propósito.
 
 \section{Esfinge Project}
 
-\par Esfinge Project\footnote{O projeto está disponível no endereço: http://esfinge.sf.net.} é um projeto \textit{open-source} iniciado em 2011 por Dr. Eduardo Guerra junto a GSW, que tem como objetivo a criação de soluções reutilizáveis para um desenvolvimento ágil, um produto final flexível e de fácil manutenção.
+\par Esfinge Project\footnote{O projeto está disponível no endereço: http://esfinge.sf.net.} é um projeto \textit{open-source} iniciado em 2011 por Dr. Eduardo Guerra junto a empresa GSW, que tem como objetivo a criação de soluções reutilizáveis para um desenvolvimento ágil, um produto final flexível e de fácil manutenção.
 \par O projeto disponibiliza 9 \textit{frameworks} até o momento, estes são: QueryBuilder, Comparison, Guardian, AOM Role Mapper, SystemGlue, Gamification, Metadata, Classmock, ReTest.
+
 \par Todos os frameworks citados acima seguem uma filosofia que consiste em: Configuração de metadados para que o comportamento desejado ocorra; Componentes que podem ser integrados a aplicações de forma simples; Pontos de extensão para criação de novas funcionalidades; Remover a preocupação com a solução que o \textit{framework} disponibiliza, permitindo que o desenvolvedor foque apenas em sua aplicação específica \cite{esfingeproject2011}.
 
 \subsection{Esfinge Gamification}
 
-\par O Esfinge Gamification\footnote{A documentação do projeto está disponível no endereço: http://esfinge.sourceforge.net/Gamification.html.} é um \textit{framework} que aplica lógica gamificação para \textit{softwares} que necessitam destes processos. Independente do domínio do \textit{software} é possível utilizar o \textit{framework}, pois este é desacoplado de lógicas da aplicação, sua responsabilidade é a tratativa dos dados de gamificação, portanto, pode ser integrado a qualquer programa Java, permitindo que o desenvolvedor foque na solução que está trabalhando, e deixe as responsabilidades de gamificação para o \textit{framework}  \citeonline{esfingegamification2011}.
+\par O Esfinge Gamification\footnote{A documentação do projeto está disponível no endereço: http://esfinge.sourceforge.net/Gamification.html.} é um \textit{framework} que aplica mecanismos de gamificação para \textit{softwares} que necessitam destes processos. Independente do domínio do \textit{software} é possível utilizar o \textit{framework}, pois este é desacoplado de lógicas da aplicação, sua responsabilidade é a tratativa dos dados de gamificação, portanto, pode ser integrado a qualquer programa Java, permitindo que o desenvolvedor foque na solução que está trabalhando, e deixe as responsabilidades de gamificação para o \textit{framework}  \cite{esfingegamification2011}.
 
 %conforme Figura \ref{fig:esfinge-gamification-plugado}
 %\begin{figure}[H]
@@ -371,7 +372,7 @@ public class Pessoa implements Serializable {
 %    \label{fig:esfinge-ga%mification-plugado}
 %\end{figure}
 
-\par O comportamento do \textit{framework} é especificado via metadados conforme a filosofia dos projetos Esfinge citada anteriormente, estes são anotações que podem ser adicionadas em programas Java, a Tabela \ref{tab:anotacoes-gamification} detalha as opções disponíveis. Existem quatro tipos de processos implementados pelo \textit{framework}, estes são: Ponto, Ranking, \textit{Reward}, Troféu vide Figura \ref{fig:arquitetura-esfinge-gamification}.
+\par O comportamento do \textit{framework} é especificado via metadados conforme a filosofia dos projetos Esfinge citada anteriormente, estes são anotações que podem ser adicionadas em programas Java, a Tabela \ref{tab:anotacoes-gamification} detalha as opções disponíveis. Existem quatro tipos de processos implementados pelo \textit{framework}, estes são: Ponto, Ranking, \textit{Reward} e Troféu, vide Figura \ref{fig:arquitetura-esfinge-gamification}.
 
 \begin{table}[H]
 \caption{Anotações disponibilizadas pelo Esfinge Gamification}
@@ -405,14 +406,14 @@ Anotação & Comportamento \\ \hline
 \par Ponto: Tem como intenção atribuir determinada quantidade de pontos e seu tipo, por exemplo, uma conquista que atribui 10 pontos de moedas de ouro, onde moedas de ouro são o tipo e 10 os pontos atribuídos. 
 \par Ranking: Se assemelha a uma hierarquia militar, onde o ranking é de status, não de posições. Por exemplo, um usuário possui o status iniciante quando começa a utilizar a aplicação, e quando realiza algum processo específico, é premiado com o status de intermediário ou avançado.
 
-\par Troféu: Pode ser atribuído uma vez apenas, por exemplo, caso um usuário realize um processo e receba um troféu por isto, na próxima vez que realizar o mesmo processo não receberá outro troféu.
+\par Troféu: Pode ser atribuído apenas uma vez, por exemplo, caso um usuário realize um processo e receba um troféu por isto, na próxima vez que realizar o mesmo processo não receberá outro troféu.
 
-\par \textit{Reward}: É uma conquista que é consumida, ou seja fica indisponível após ser usada. Por exemplo, um \textit{reward} de bônus de ligações será recebido não consumido por padrão, ou seja, disponível para ser usado. Este só será consumido quando uma ligação for realizada com seu recurso de bônus, e após isso ficará indisponível.
+\par \textit{Reward}: É uma conquista que é consumida, ou seja, fica indisponível após ser usada. Por exemplo, um \textit{reward} de bônus de ligações será recebido não consumido por padrão, isto é, disponível para ser usado. Este só será consumido quando uma ligação for realizada com seu recurso de bônus, e após isso ficará indisponível.
 
 \subsubsection{Pontos de extensão}
 
-O \textit{framework} possui dois pontos de extensão (\textit{hotspots}), onde novos comportamentos podem ser adicionados quando necessário. Desta forma é possível aplicar outras lógicas de gamificação, implementando a interface \textit{Achievement} (Figura \ref{fig:arquitetura-esfinge-gamification}) disponível no pacote net.sf.esfinge.gamification.achievement, caso os comportamentos disponibilizados pelo \textit{framework} não sejam adequados \`a determinada situação. 
-\par A interface \textit{Achievement} exibida na Figura \ref{fig:interface-achievement} possui três métodos, eles servem para realizar os respectivos processos em Achievements: Recuperação de nome; Incrementar informações (adição de pontos por exemplo); e remoção.
+\par O \textit{framework} possui dois pontos de extensão (\textit{hotspots}), onde novos comportamentos podem ser adicionados quando necessário. Desta forma é possível aplicar outras lógicas de gamificação, implementando a interface Achievement (Figura \ref{fig:arquitetura-esfinge-gamification}) disponível no pacote net.sf.esfinge.gamification.achievement, caso os comportamentos disponibilizados pelo \textit{framework} não sejam adequados \`a determinada situação. 
+\par A interface Achievement exibida na Figura \ref{fig:interface-achievement} possui três métodos, eles servem para realizar os respectivos processos em Achievements: Recuperação de nome; Incremento de informações (adição de pontos por exemplo); e remoção de informações.
 
 \begin{figure}[H]
     \centering
@@ -428,7 +429,7 @@ public interface Achievement {
 }
     \end{java}
     \label{fig:interface-achievement}
-    \fonte{Produção do autor}
+    \fonte{Adaptado de \citeonline{esfingegamification2011}}
 \end{figure}
 
 \par Implementando esta interface novas ações podem ser adicionados via anotações, elas possuirão a anotação @GamificationProcessor exibida na Figura \ref{fig:gamification-processor}, que recebe uma classe que implemente a interface AchievementProcessor como parâmetro.
@@ -443,7 +444,7 @@ public @interface GamificationProcessor {
 }
 
     \end{java}
-    \fonte{Produção do autor}
+    \fonte{Adaptado de \citeonline{esfingegamification2011}}
     \label{fig:gamification-processor}
 \end{figure}
 
@@ -494,7 +495,7 @@ public class PointsToUserProcessor implements AchievementProcessor {
     \fonte{Adaptado de \citeonline{esfingegamification2011}}
 \end{figure}
 
-\par A interface AchievementProcessor exibida na Figura \ref{fig:achievement-processor} possui dois métodos a serem implementados, estes são: receiveAnnotation e process. Eles tem o objetivo de recuperar informações da anotação recebida e executar seu comportamento, respectivamente. A Figura \ref{fig:achievement-processor-implementado} exibe um exemplo onde as informações quantity e name são recuperadas da anotação @PointsToUser entre as linhas 8 e 10. O comportamento desta implementação é a atribuição de pontos, portanto o método addAchievement é invocado para que isso seja persistido de acordo com a especialização da classe \textit{Game}.
+\par A interface AchievementProcessor exibida na Figura \ref{fig:achievement-processor} possui dois métodos a serem implementados, estes são: receiveAnnotation() e process(). Eles tem o objetivo de recuperar informações da anotação recebida e executar seu comportamento, respectivamente. A Figura \ref{fig:achievement-processor-implementado} exibe um exemplo onde as informações quantity e name são recuperadas da anotação @PointsToUser entre as linhas 8 e 10. O comportamento desta implementação é a atribuição de pontos, portanto o método addAchievement() é invocado para que isso seja persistido de acordo com a especialização da classe Game.
 
 \begin{figure}[H]
     \centering
@@ -509,14 +510,15 @@ public interface AchievementProcessor {
 }
     \end{java}
     \label{fig:achievement-processor}
+    \fonte{Adaptado de \citeonline{esfingegamification2011}}
 \end{figure}
 
-Também é possível adicionar novos comportamentos de persistência estendendo a classe abstrata \textit{Game}, disponível no pacote net.sf.esfinge.gamification.mechanics. Atualmente existem três implementações, estas são: Persistência em arquivo de propriedades; Banco de dados relacional; e em memória \cite{esfingegamification2011}.
+\par Também é possível adicionar novos comportamentos de persistência estendendo a classe abstrata Game, disponível no pacote net.sf.esfinge.gamification.mechanics. Atualmente existem três implementações, estas são: Persistência em arquivo de propriedades; Banco de dados relacional; e em memória \cite{esfingegamification2011}.
 
 \subsubsection{Funcionamento do Esfinge Gamification}
 
 \par A Figura \ref{fig:gamification-diagrama-classe-cap2} apresenta o diagrama de classe do projeto, já o diagrama apresentado na Figura \ref{fig:diagrama-funcionamento-gamification} exibe o fluxo de funcionamento do Esfinge Gamification. A classe 
-UserStorage possui dois métodos, setUserID e getUserID, responsáveis por definir o usuário que será utilizado nos processos de gamificação e recuperar este usuário, respectivamente.
+UserStorage possui dois métodos, setUserID() e getUserID(), responsáveis por definir o usuário que será utilizado nos processos de gamificação e recuperar este usuário, respectivamente.
 
 \begin{image}
 {0.5} %scale
@@ -573,11 +575,11 @@ public class GameProxy implements InvocationHandler {
 }
     \end{java}
     \label{fig:gamification-proxy}
-    \fonte{Produção do autor}
+    \fonte{Adaptado de \citeonline{esfingegamification2011}}
 \end{figure}
 
-A Figura \ref{fig:bpmn-recuperacao-achievement-processor} detalha os processos macro da Figura \ref{fig:diagrama-funcionamento-gamification}. Quando o \textit{proxy} intercepta execuções, este procura por metadados na classe e no método que foi interceptado, como é possível identificar no segundo passo do processo getAnnotations. %Em outras palavras este método procura as anotações citadas na Tabela \ref{tab:anotacoes-gamification} e retorna uma lista com implementações da interface \textit{AchievementProcessor}.
-Cada anotação encontrada é passada para o processo createAchievementProcessor que procura pelos metadados citados na Tabela \ref{tab:anotacoes-gamification} retornando um Optional com a implementação de AchievementProcessor caso o metadado possua a anotação @GamificationProcessor ou vazio caso não possua, para que este seja adicionado a uma lista de AchievementProcessors criada para que os métodos process sejam executados, aplicando o comportamento específico das anotações.
+A Figura \ref{fig:bpmn-recuperacao-achievement-processor} detalha os processos macro da Figura \ref{fig:diagrama-funcionamento-gamification}. Quando o PD intercepta execuções, este procura por metadados na classe e no método que foi interceptado, como é possível identificar no segundo passo do processo "método getAnnotations". %Em outras palavras este método procura as anotações citadas na Tabela \ref{tab:anotacoes-gamification} e retorna uma lista com implementações da interface \textit{AchievementProcessor}.
+Cada anotação encontrada é passada para o processo " método createAchievementProcessor" que procura pelos metadados citados na Tabela \ref{tab:anotacoes-gamification} retornando um Optional com a implementação de AchievementProcessor caso o metadado possua a anotação @GamificationProcessor citada anteriormente, para que esta implementação seja adicionada a uma lista de AchievementProcessors criada, a fim de executar os métodos process(), aplicando o comportamento específico das anotações.
 
 \begin{image}
 {0.45} %scale
@@ -678,15 +680,6 @@ Cada anotação encontrada é passada para o processo createAchievementProcessor
 
 \par O \textit{framework} é dividido por módulos, estes possuem a arquitetura exibida na Figura \ref{fig:arquitetura-guardian}. Abaixo seus módulos serão explicados:
 
-\begin{itemize}
-    \item Guardian: Este é o Super POM \citeonline{apachesoftwarefoundation2019} do projeto, tem como objetivo controlar as dependências compartilhadas e o processo de empacotamento dos demais;
-    
-    \item Guardian-core: Tem as funcionalidades essenciais para um modelo de autorização, este modulo é utilizado por todos os modelos de controle de acesso presentes no Esfinge Guardian;
-    
-    \item RBAC, ABAC e MAC: Implementam os modelo de controle de acesso com seus nomes.
- 
-\end{itemize}
-
 \begin{image}
 {0.15} %scale
 {src/imagens/cap2/arquitetura-modulos-guardian.png} %relative path
@@ -695,9 +688,18 @@ Cada anotação encontrada é passada para o processo createAchievementProcessor
 {Adaptado de \citeonline{guerra2017approach}} %font
 \end{image}
 
-\subsubsection{Pontos de extensão}
+\begin{itemize}
+    \item Guardian: Este é o Super Project Object Model (POM) \citeonline{apachesoftwarefoundation2019} do projeto, tem como objetivo controlar as dependências compartilhadas e o processo de empacotamento dos demais módulos;
+    
+    \item Guardian-core: Tem as funcionalidades essenciais para um modelo de autorização, este modulo é utilizado por todos os modelos de controle de acesso presentes no Esfinge Guardian;
+    
+    \item RBAC, ABAC e MAC: Implementam os modelo de controle de acesso com seus nomes.
+ 
+\end{itemize}
 
-\par Nesta seção os \textit{hotspots} do Esfinge Guardian serão abordados, para estender o \textit{framework} é necessário implementar as interfaces Populator e Authorizer, além da criação de anotações de segurança.
+\subsubsection{\label{sc:extensao-guardian}Pontos de extensão}
+
+\par Nesta seção os \textit{hotspots} do Esfinge Guardian serão abordados. Para estender o \textit{framework} é necessário implementar as interfaces Populator e Authorizer, além da criação de anotações de segurança.
 
 \par A interface Populator exibida na Figura \ref{fig:interface-populator} possui o método populate, que é dedicado a recuperação de informações de segurança necessárias para a autorização. 
 
@@ -728,17 +730,17 @@ public @interface PopulatorClass {
     \fonte{Adaptado de \citeonline{esfingeguardian}}
 \end{figure}
 
-\par O arquivo de configuração org.esfinge.guardian.populator.Populator precisa estar localizado no caminho resources/META-INF/services/ para ser identificado pelo \textit{framework}. O conteúdo deste arquivo é a classe e o pacote que implementam a interface Populator, portanto, se a classe PopulatorImpl localizada no pacote br.org.fatec for configurada desta forma, o conteúdo do arquivo será br.org.fatec.PopulatorImpl e a estrutura de diretórios ficará com o diretório resources localizado no mesmo nível dos pacotes, conforme a Figura \ref{fig:populator-tree} exemplifica.
+\par O arquivo de configuração "org.esfinge.guardian.populator.Populator"\ precisa estar localizado no caminho resources/META-INF/services/ para ser identificado pelo \textit{framework}. O conteúdo deste arquivo é a classe e o pacote que implementam a interface Populator, portanto, se a classe PopulatorImpl localizada no pacote br.org.fatec for configurada desta forma, o conteúdo do arquivo será br.org.fatec.PopulatorImpl e a estrutura de diretórios ficará com o diretório resources localizado no mesmo nível dos pacotes de arquivos fonte, conforme a Figura \ref{fig:populator-tree} exemplifica.
 
 \begin{image}
-{0.3} %scale
+{0.4} %scale
 {src/imagens/cap2/populator-tree.png} %relative path
 {Estrutura de diretórios para identificação da implementação da interface Populator} %caption
 {fig:populator-tree} %label
 {Produção do autor} %font
 \end{image}
 
-\par A interface Authorizer (Figura \ref{fig:interface-authorizer}) possui o método authorize, seu retorno é um booleano, que consiste na liberação da autorização ou não. Esta também possui a declaração de um atributo genérico E extends Annotation, neste atributo é esperado a anotação de segurança que será avaliada pela implementação. 
+\par A interface Authorizer (Figura \ref{fig:interface-authorizer}) possui o método authorize, seu retorno é um booleano, que consiste na liberação da autorização ou não. Esta também possui a declaração de um atributo genérico (E extends Annotation), neste atributo é esperado a anotação de segurança que será avaliada pela implementação. 
 
 \begin{figure}[H]
     \centering
